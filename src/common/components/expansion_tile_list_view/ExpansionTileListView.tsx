@@ -1,5 +1,5 @@
 import { ExpandableTile } from "../expantion_tile/ExpantionTile";
-import "./ExpansionTileListView.scss";
+import  "./ExpansionTileListView.css";
 
 type ExpansionTileListHolderArg = {
   parentPath: string;
@@ -9,7 +9,7 @@ type ExpansionTileListHolderArg = {
 
 export function ExpansionTileListView(arg: ExpansionTileListHolderArg) {
   return (
-    <div className="expansion-tile-list">
+    <div className='expansion-tile-list'>
       {arg.nodes?.map(([key, node]) => {
         return (
           <ExpandableTile

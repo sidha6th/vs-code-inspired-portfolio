@@ -25,7 +25,7 @@ export function ExpandableTile(arg: FileOrFolderItemArg) {
               <p className={style.title}>{arg.node?.name}</p>
             </div>
           }
-          marginLeft={marginLeftRef.current}
+          marginLeft={marginLeftRef.current < 1 ? 0 : marginLeftRef.current + 3}
           parentPath={arg.parentPath + arg.node?.name}
         />
       </div>

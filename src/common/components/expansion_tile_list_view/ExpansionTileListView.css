@@ -1,0 +1,20 @@
+.expansion-tile-list {
+    overflow: auto;
+}
+
+.expansion-tile-list::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+.expansion-tile-list::-webkit-scrollbar-track {
+    background: var(--editor-bg);
+}
+
+.expansion-tile-list::-webkit-scrollbar-thumb {
+    background: var(--scroll-bar-bg);
+}
+
+.expansion-tile-list::-webkit-scrollbar-corner {
+    background: var(--scroll-bar-bg);
+}
