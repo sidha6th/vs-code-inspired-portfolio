@@ -1,0 +1,6 @@
+#bottomBar {
+  background-color: var(--bottom-bar-bg);
+  height: var(--bottom-bar-height);
+  display: block;
+  border-radius: 0px 0px 10px 10px;
+}

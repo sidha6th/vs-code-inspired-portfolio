@@ -1,0 +1,26 @@
+@import '../../../../common/styles/global.scss';
+
+#workbench {
+  background-color: var(--side-panel-bg);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.title-box{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 50px;
+  padding: 0px 10px 0px 10px;
+  justify-content: space-between;
+}
+
+.titleBox>.workBenchTitle {
+  font-size: 10px;
+  font-weight: 100;
+}
+.expansionTileList{
+  overflow: auto;
+}

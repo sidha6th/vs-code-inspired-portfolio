@@ -1,0 +1,21 @@
+@import '../../styles/global.scss';
+
+div.tileWrapper {
+    width: 100%;
+}
+
+div.clickObserver {
+    display: flex;
+    flex-direction: column;
+    @include hoverStyle();
+}
+
+.folderTile {
+    display: flex;
+    padding-left: 10px;
+    align-items: center;
+}
+
+.space {
+    width: 5px;
+}

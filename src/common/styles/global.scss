@@ -1,0 +1,19 @@
+@mixin hoverStyle($hoverBackground:var(--editor-bg)) {
+    &:hover {
+        background-color: $hoverBackground ;
+    }
+  }
+  
+  @mixin buttonHover() {
+    &:hover {
+      background-color: var(--side-panel-bg);
+      border-radius: 4px;
+    }
+  }
+  
+  @mixin font {
+    color: var(--primary-white);
+    line-height: 40px;
+    text-align: justify;
+    font-family: Consolas, Courier New, monospace;
+  }

@@ -1,0 +1,30 @@
+#sideBar {
+  height: 100%;
+  width: var(--side-bar-width);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--side-bar-bg);
+  overflow-y: auto;
+}
+#sideBar::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+
+#sideBar::-webkit-scrollbar-track {
+  background: var(--editor-bg);
+}
+
+#sideBar::-webkit-scrollbar-thumb {
+  background: var(--scroll-bar-bg);
+}
+#sideBar::-webkit-scrollbar-corner{
+  background: var(--scroll-bar-bg);
+}
+
+.sideBarButton {
+  padding: 10px;
+  border-left: solid var(--bottom-bar-bg);
+}
+

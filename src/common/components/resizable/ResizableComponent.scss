@@ -1,0 +1,19 @@
+@import'../../styles/global.scss';
+
+.resizable {
+    height: 100%;
+    width: 100%;
+    flex-shrink: 0;
+    display: flex;
+}
+
+#dragger {
+    width: var(--resizable-drager-width);
+    height: 100%;
+    background-color: var(--side-panel-bg);
+    @include hoverStyle(var(--bottom-bar-bg));
+    &:hover {
+        cursor: w-resize;
+    }
+    align-self: flex-end;
+}

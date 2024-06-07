@@ -1,0 +1,41 @@
+@mixin dimensions() {
+  --top-bar-height: 30px;
+  --top-bar-circle-size: 10px;
+  --bottom-bar-height: 20px;
+  --side-bar-width: 40px;
+  --resizable-drager-width:4px;
+  --expandable-item-height:20px;
+}
+
+[data-theme="dark"] {
+  --root-bg: #080808;
+  --text:#fdfdfd;
+  --primary-white:rgb(238, 236, 236);
+  --top-bar-bg: #333333;
+  --line-gray:#313131;
+  --bottom-bar-bg: #0776c7;
+  --editor-bg: #1b1b1b;
+  --side-bar-bg: #2c2c2c;
+  --side-panel-bg: #212121;
+  --scroll-bar-bg: #262626;
+  --main-bg: var(--side-panel-bg);
+  --image-bg:#181818;
+  --red: #ed484f;
+  --yellow: #f8b42b;
+  --green: #27d93b;
+  @include dimensions()
+}
+
+[data-theme="dracula"] {
+  --bottom-bar-bg: #fdfdfd;
+  --editor-bg: #1b1b1b;
+  --side-bar-bg: #2c2c2c;
+  --top-bar-bg: #333333;
+  --side-panel-bg: #282a36;
+  --main-bg: var(--side-panel-bg);
+  --scroll-bar-bg: #262626;
+  --red: #ed484f;
+  --yellow: #f8b42b;
+  --green: #27d93b;
+  @include dimensions()
+}
