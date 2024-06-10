@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import style from "./Arrow.module.css";
+import style from "./IconStyle.module.css";
 const ArrowIcon = ({ opened }: { opened?: boolean }) => {
   const svgRef = useRef<SVGSVGElement>(null);
 

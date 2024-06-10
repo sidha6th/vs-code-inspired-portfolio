@@ -1,10 +1,42 @@
 class WorkBenchElements implements INode {
   name: string;
-  node: Map<string, (INode|undefined)>;
+  node: Map<string, INode | undefined>;
 
-  constructor(name: string, node?: Map<string, (INode|undefined)>) {
+  constructor(name: string, node?: Map<string, INode | undefined>) {
     this.name = name;
-    this.node = node ?? new Map<string, (INode | undefined)>();
+    this.node = node ?? new Map<string, INode | undefined>();
+  }
+  searchFile(path: string): string | undefined {
+    const splittedPath = path.toLowerCase().split("/");
+    const fileName = splittedPath.pop();
+    if (splittedPath[0].length < 1) {
+      splittedPath.shift();
+    }
+    if (fileName != undefined && fileName?.trim().length > 0) {
+      const file = this.node.get(fileName);
+      if (file != undefined) {
+        return file.name;
+      }
+    }
+    const node = this._traverseAndFindFile(splittedPath)?.get(fileName!);
+    return node?.name;
+  }
+  _traverseAndFindFile(
+    splittedPath: string[],
+    node?: Map<string, INode | undefined>
+  ): Map<string, INode | undefined> | undefined {
+    if (splittedPath.length <= 0) {
+      return node ?? this.node;
+    }
+    const path = splittedPath.shift();
+    if (path == undefined) {
+      return;
+    }
+    const nextNode = (node ?? this.node).get(path+'/');
+    if (nextNode == undefined) {
+      return;
+    }
+    return this._traverseAndFindFile(splittedPath, nextNode.node);
   }
 
   create(...paths: string[]): void {
@@ -28,7 +60,7 @@ class WorkBenchElements implements INode {
   }
 
   get hasChild(): boolean {
-    return (this.node.size>0);
+    return this.node.size > 0;
   }
 
   get nameOnly(): string {
@@ -75,8 +107,8 @@ class WorkBenchElements implements INode {
 
   _traverseAndCreatePath(
     splittedPath: string[],
-    nextNode?: Map<string, (INode|undefined)>
-  ): Map<string, (INode|undefined)> | undefined {
+    nextNode?: Map<string, INode | undefined>
+  ): Map<string, INode | undefined> | undefined {
     const currentNode = nextNode ?? this.node;
     if (splittedPath.length == 0) {
       return currentNode;

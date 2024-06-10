@@ -1,4 +1,4 @@
-.tile {
+.title {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -6,7 +6,6 @@
     height: var(--expandable-item-height);
     user-select: none;
 }
-
 
 p.title {
     color: var(--text);

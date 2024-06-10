@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import "./ResizableComponent.scss";
+import style from "./ResizableComponent.module.scss";
 import React from "react";
 import Constants from "../../../constants/Constants";
 
@@ -27,21 +27,27 @@ export function ResizableComponent(arg: ResizableComponentArg) {
   };
 
   const onMouseUp = () => {
+    resizableHandle.current?.classList.remove('active')
     document.removeEventListener("mousemove", onMouseMove);
   };
 
   const onMouseDown = (
     e: MouseEvent | React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
+    resizableHandle.current?.classList.add('active')
     xCor.current = e.clientX;
     document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("mouseup", onMouseUp);
   };
 
   return (
-    <div className="resizable" style={{ width: widthState}}>
+    <div className={style.resizable} style={{ width: widthState }}>
       {arg.child}
-      <div ref={resizableHandle} id="dragger" onMouseDown={onMouseDown}></div>
+      <div
+        ref={resizableHandle}
+        id={style.dragger}
+        onMouseDown={onMouseDown}
+      ></div>
     </div>
   );
 }

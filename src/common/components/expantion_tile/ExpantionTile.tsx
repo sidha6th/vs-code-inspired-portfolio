@@ -15,20 +15,21 @@ export function ExpandableTile(arg: FileOrFolderItemArg) {
   const marginLeftRef = useRef(
     Constants.dimension.expansionPanelPadLeftWith * arg.padLeftCount
   );
-
   if (arg.node?.isFile) {
     return (
-      <div className={style.wrapper}>
-        <FileTile
-          child={
-            <div className={style.tile}>
-              <p className={style.title}>{arg.node?.name}</p>
-            </div>
-          }
-          marginLeft={marginLeftRef.current < 1 ? 0 : marginLeftRef.current + 3}
-          parentPath={arg.parentPath + arg.node?.name}
-        />
-      </div>
+        <div className={style.wrapper}>
+          <FileTile
+            child={
+              <div className={style.title}>
+                <p className={style.title}>{arg.node?.name}</p>
+              </div>
+            }
+            marginLeft={
+              marginLeftRef.current < 1 ? 0 : marginLeftRef.current + 3
+            }
+            parentPath={arg.parentPath}
+          />
+        </div>
     );
   }
 
@@ -36,13 +37,13 @@ export function ExpandableTile(arg: FileOrFolderItemArg) {
     <div className={style.wrapper}>
       <FolderTile
         child={
-          <div className={style.tile}>
+          <div className={style.title}>
             <p className={style.title}>{arg.node?.nameOnly}</p>
           </div>
         }
         paddLeftCount={arg.padLeftCount}
         marginLeft={marginLeftRef.current}
-        parentPath={arg.parentPath + arg.node?.name}
+        parentPath={arg.parentPath}
         node={arg.node}
       />
     </div>

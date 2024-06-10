@@ -1,3 +1,6 @@
+$borderWidth: 2px;
+$buttonPaddig: 10px;
+
 #sideBar {
   height: 100%;
   width: var(--side-bar-width);
@@ -7,6 +10,21 @@
   background-color: var(--side-bar-bg);
   overflow-y: auto;
 }
+
+.sideBarButton {
+  padding: $buttonPaddig $buttonPaddig $buttonPaddig calc($buttonPaddig - $borderWidth);
+  border-left: solid $borderWidth var(--side-bar-bg);
+}
+
+.sideBarButton.active {
+  border-left: solid $borderWidth var(--bottom-bar-bg);
+}
+
+
+
+
+
+
 #sideBar::-webkit-scrollbar {
   width: 2px;
   height: 2px;
@@ -19,12 +37,7 @@
 #sideBar::-webkit-scrollbar-thumb {
   background: var(--scroll-bar-bg);
 }
-#sideBar::-webkit-scrollbar-corner{
+
+#sideBar::-webkit-scrollbar-corner {
   background: var(--scroll-bar-bg);
 }
-
-.sideBarButton {
-  padding: 10px;
-  border-left: solid var(--bottom-bar-bg);
-}
-

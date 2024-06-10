@@ -4,11 +4,17 @@
     padding-left: 12.33px;
 
 }
-div.clickObserver{
+
+div.clickObserver {
     display: flex;
     flex-direction: column;
     @include hoverStyle();
 }
+
 div.tileWrapper {
     width: 100%;
+}
+
+.selected {
+    background-color: var(--editor-bg);
 }

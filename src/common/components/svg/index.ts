@@ -1,5 +1,5 @@
 export { default as Arrow } from "../arrow_icon/Arrow";
-export { default as Close } from "./Close";
+export { default as Close } from "../arrow_icon/Close";
 export { default as Code } from "./Code";
 export { default as Css } from "./Css";
 export { default as Dart } from "./Dart";

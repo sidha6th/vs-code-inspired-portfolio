@@ -1,0 +1,27 @@
+#opened-pages-title-card-holder {
+  height: 33px;
+  flex-shrink: 0;
+  width: 100%;
+  background-color: var(--side-panel-bg);
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+#opened-pages-title-card-holder::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+
+#opened-pages-title-card-holder::-webkit-scrollbar-track {
+  background: var(--editor-bg);
+}
+
+#opened-pages-title-card-holder::-webkit-scrollbar-thumb {
+  background: var(--scroll-bar-bg);
+}
+
+#opened-pages-title-card-holder::-webkit-scrollbar-corner{
+  background: var(--scroll-bar-bg);
+}
