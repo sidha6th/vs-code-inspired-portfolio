@@ -4,6 +4,7 @@
   height: 100%;
   width: 100%;
   overflow: auto;
+  container-type: inline-size;
 }
 
 section>hr {
@@ -23,6 +24,7 @@ h1.title {
 .section {
   padding: 20px;
 }
-.section>h1{
+
+.section>h1 {
   @include font;
 }

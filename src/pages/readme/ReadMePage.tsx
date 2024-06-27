@@ -1,10 +1,12 @@
 import style from "./ReadMePage.module.scss";
 import wave from "../../assets/gif/wave.gif";
 import { ReadMeSection } from "./components/readme_section/ReadMeSection.tsx";
+import IntroSection from "./components/image_animation_section/IntroSection.tsx";
 
- function ReadMePage() {
+function ReadMePage() {
   return (
     <div id={style.page}>
+      <IntroSection/>
       <ReadMeSection
         title={
           <h1 className={style.title}>

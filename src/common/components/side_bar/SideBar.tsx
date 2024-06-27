@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Explore } from "../svg";
 import style from "./SideBar.module.scss";
+import { toggleWorkbenchVisiblity } from "../../helpers/work_bench_helpers";
 
 export default function SideBar() {
   const exploreButtonRef = useRef<HTMLDivElement>(null);
@@ -16,7 +17,9 @@ export default function SideBar() {
       <div
         ref={exploreButtonRef}
         className={style.sideBarButton}
-        onClick={() => onClick(exploreButtonRef.current)}
+        onClick={() =>
+          onClick(exploreButtonRef.current, _onClickExplorerButton)
+        }
       >
         <Explore />
       </div>
@@ -37,7 +40,11 @@ export default function SideBar() {
     </div>
   );
 
-  function onClick(element: HTMLDivElement | null) {
+  function _onClickExplorerButton() {
+    toggleWorkbenchVisiblity();
+  }
+  function onClick(element: HTMLDivElement | null, cb?: () => void) {
+    cb?.call(cb);
     _toggleActiveState(element);
   }
 
@@ -46,8 +53,8 @@ export default function SideBar() {
     index?: number | undefined
   ) {
     const buttons = document.getElementsByClassName(style.sideBarButton);
-    if (index!=undefined) {
-      buttons.item(index)?.classList.add(style.active)
+    if (index != undefined) {
+      buttons.item(index)?.classList.add(style.active);
       return;
     }
     for (let index = 0; index < buttons.length; index++) {

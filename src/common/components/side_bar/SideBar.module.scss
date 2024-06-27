@@ -17,13 +17,9 @@ $buttonPaddig: 10px;
 }
 
 .sideBarButton.active {
+  transition: border 1s;
   border-left: solid $borderWidth var(--bottom-bar-bg);
 }
-
-
-
-
-
 
 #sideBar::-webkit-scrollbar {
   width: 2px;

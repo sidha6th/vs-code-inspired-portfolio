@@ -1,6 +1,19 @@
-.resizable {
+div#resizableWorkBench.overlayed {
+    position: relative;
     height: 100%;
     width: 100%;
+    display: flex;
+}
+
+#resizableWorkBench.hide {
+    height: 100%;
+    width: 0;
+    display: flex;
+}
+
+.resizable {
+    height: 100%;
+    width: var(--work-bench-width);
     flex-shrink: 0;
     display: flex;
 }
@@ -11,12 +24,14 @@
     height: 100%;
     background-color: var(--side-panel-bg);
     align-self: flex-end;
+
     &:hover {
-    background-color: var(--bottom-bar-bg);
+        background-color: var(--bottom-bar-bg);
         cursor: w-resize;
     }
 }
-#dragger.active{
+
+#dragger.active {
     background-color: var(--bottom-bar-bg);
     cursor: w-resize;
 }

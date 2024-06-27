@@ -1,5 +1,6 @@
 export const dimensions = {
   minSidePanelWidth: 150,
-  sidePanelDefaultWidth: 300,
+  workBenchDefaultWidth: 300,
   expansionPanelPadLeftWith:10,
+  minVWToDisplyWorkbench:400,
 };

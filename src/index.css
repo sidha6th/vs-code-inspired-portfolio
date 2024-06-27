@@ -32,6 +32,6 @@ body {
   background: var(--scroll-bar-bg);
 }
 
-::-webkit-scrollbar-corner{
+::-webkit-scrollbar-corner {
   background: var(--scroll-bar-bg);
 }
