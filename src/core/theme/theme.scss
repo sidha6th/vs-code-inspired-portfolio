@@ -3,28 +3,44 @@
   --top-bar-circle-size: 10px;
   --bottom-bar-height: 20px;
   --side-bar-width: 40px;
-  --work-bench-width:300px;
-  --resizable-drager-width:4px;
-  --expandable-item-height:20px;
+  --work-bench-width: 300px;
+  --resizable-drager-width: 4px;
+  --expandable-item-height: 20px;
+  --space-width: 10px;
+  --tab-width: 20px;
+  --page-line-indicator-width: 40px;
+}
+
+@mixin comonColor() {
+  --break-point: #dd2f1f;
 }
 
 [data-theme="dark"] {
   --root-bg: #080808;
-  --text:#fdfdfd;
-  --primary-white:rgb(238, 236, 236);
+  --text: #fdfdfd;
+  --primary-white: rgb(238, 236, 236);
   --top-bar-bg: #333333;
-  --line-gray:#313131;
+  --line-gray: #313131;
+  --text-gray: #778477;
   --bottom-bar-bg: #0776c7;
   --editor-bg: #1b1b1b;
   --side-bar-bg: #2c2c2c;
   --side-panel-bg: #212121;
   --scroll-bar-bg: #262626;
   --main-bg: var(--side-panel-bg);
-  --image-bg:#181818;
+  --image-bg: #181818;
   --red: #ed484f;
   --yellow: #f8b42b;
   --green: #27d93b;
-  @include dimensions()
+
+  // json
+  --curly-braces: #dad424;
+  --json-value: #c06031;
+  --json-key: #8fdcdb;
+
+  //
+  @include dimensions();
+  @include comonColor();
 }
 
 [data-theme="dracula"] {

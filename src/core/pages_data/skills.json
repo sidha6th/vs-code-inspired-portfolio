@@ -1,0 +1,24 @@
+{
+    "progamming-languages": [
+        "dart",
+        "javascipt",
+        "typescript",
+        "kotlin",
+        "swift"
+    ],
+    "frameworks": {
+        "Flutter": {
+            "statemenagement-tool": [
+                "block",
+                "provider",
+                "getX",
+                "Riverpod"
+            ]
+        },
+        "react-js": {
+            "statemenagement-tool": [
+                "redux"
+            ]
+        }
+    }
+}

@@ -1,0 +1,112 @@
+div.SingleLine {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 20px;
+}
+
+div.lineCountIndicator {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-shrink: 0;
+  width: var(--page-line-indicator-width);
+  height: 100%;
+  align-items: center;
+}
+
+p.lineCount {
+  color: var(--line-gray);
+  font-size: 15px;
+  margin: 0;
+}
+
+div.breakPointWrapper {
+  width: 100%;
+  padding: 0 10px 0 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+div.breakPoint {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+div.lineCountIndicator:hover div.breakPoint {
+  background-color: var(--break-point);
+}
+
+div.lineWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+p {
+  margin: 2px;
+}
+
+div.childWrapper {
+  position: absolute;
+  left: calc(var(--page-line-indicator-width) + 10px);
+}
+
+p.curlyBraces {
+  color: var(--curly-braces);
+}
+
+div.pageLineIndicator {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding-right: 10px;
+}
+
+div.keyValuePairTextBoderLess {
+  display: flex;
+  padding-left: 5px;
+}
+
+div.keyValuePairText {
+  display: flex;
+  padding-left: 5px;
+  border-left: solid 1px var(--line-gray);
+}
+
+p.value {
+  color: var(--json-value);
+}
+
+p.key {
+  color: var(--json-key);
+}
+
+p[content="{"] {
+  color: var(--curly-braces);
+}
+
+p[content="}"] {
+  color: var(--curly-braces);
+}
+
+p[content=":"] {
+  color: var(--text-gray);
+}
+
+p[content=","] {
+  color: var(--text-gray);
+}
+
+div.contentAligner{
+border-left:solid 1px var(--line-gray);
+}
+div.contentAligner2{
+  width: 1px;
+border-left:solid 1px var(--line-gray);
+}
