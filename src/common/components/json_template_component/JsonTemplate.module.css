@@ -68,9 +68,9 @@ div.pageLineIndicator {
   padding-right: 10px;
 }
 
-div.keyValuePairTextBoderLess {
+div.contentAligner {
   display: flex;
-  padding-left: 5px;
+  padding-left: 0px;
 }
 
 div.keyValuePairText {
@@ -103,10 +103,8 @@ p[content=","] {
   color: var(--text-gray);
 }
 
-div.contentAligner{
-border-left:solid 1px var(--line-gray);
-}
-div.contentAligner2{
-  width: 1px;
-border-left:solid 1px var(--line-gray);
+
+div.letPadder {
+  width: 10px;
+  border-left: solid 1px var(--line-gray);
 }

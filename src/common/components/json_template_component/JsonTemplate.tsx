@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import style from "./JsonTemplate.module.css";
 
 export type Skill = {
@@ -11,6 +12,7 @@ export type JsonTemplateArg = {
   leftPadCount: number;
   specilChar?: string;
   border?: boolean;
+  headderOrFooterPaddLength: number;
   head: { key?: string; value: string };
   tail?: { key?: string; value: string };
 };
@@ -19,10 +21,10 @@ function JsonTemplate(arg: JsonTemplateArg) {
   return (
     <>
       <SingleLine
-        leftPaddCount={arg.leftPadCount ?? 0}
         count={arg.initialIndex ?? 0}
         child={
           <KeyValuePairText
+            leftPadder={<LeftPaddes length={arg.headderOrFooterPaddLength} />}
             border={arg.border}
             jsonKey={arg.head.key}
             value={arg.head.value}
@@ -34,6 +36,7 @@ function JsonTemplate(arg: JsonTemplateArg) {
         if (Array.isArray(item.value)) {
           return (
             <JsonTemplate
+              headderOrFooterPaddLength={arg.headderOrFooterPaddLength + 1}
               border
               head={{ key: item.key, value: "{" }}
               leftPadCount={arg.leftPadCount + 1}
@@ -45,10 +48,10 @@ function JsonTemplate(arg: JsonTemplateArg) {
 
         return (
           <SingleLine
-            leftPaddCount={arg.leftPadCount+1}
             count={arg.initialIndex ?? 0 + index}
             child={
               <KeyValuePairText
+                leftPadder={<LeftPaddes length={arg.leftPadCount} />}
                 border
                 jsonKey={item.key}
                 value={item.value}
@@ -59,12 +62,24 @@ function JsonTemplate(arg: JsonTemplateArg) {
         );
       })}
       <SingleLine
-        leftPaddCount={arg.leftPadCount ?? 0}
         count={arg.initialIndex ?? 0}
-        child={<KeyValuePairText value="}" />}
+        child={
+          <KeyValuePairText
+            leftPadder={<LeftPaddes length={arg.headderOrFooterPaddLength} />}
+            value="}"
+          />
+        }
       />
     </>
   );
+}
+
+function LeftPaddes(arg: { length: number }) {
+  const paddings: JSX.Element[] = [];
+  for (let i = 0; i < arg.length; i++) {
+    paddings.push(<div className={style.letPadder} />);
+  }
+  return <>{paddings}</>;
 }
 
 function KeyValuePairText(arg: {
@@ -72,13 +87,11 @@ function KeyValuePairText(arg: {
   value: string;
   border?: boolean;
   specialChar?: string;
+  leftPadder?: JSX.Element;
 }) {
   return (
-    <div
-      className={
-        arg.border ? style.keyValuePairText : style.keyValuePairTextBoderLess
-      }
-    >
+    <div className={style.contentAligner}>
+      {arg.leftPadder}
       {arg.jsonKey == undefined ? (
         <></>
       ) : (
@@ -97,12 +110,9 @@ function KeyValuePairText(arg: {
 type SingleLineArg = {
   child: JSX.Element;
   count: number;
-  leftPaddCount: number;
 };
 
-function SingleLine({ child, count, leftPaddCount }: SingleLineArg) {
-const paddingLeft =`${leftPaddCount * 10}px`;
-
+function SingleLine({ child, count }: SingleLineArg) {
   return (
     <div className={style.SingleLine}>
       <div className={style.lineCountIndicator}>
@@ -111,14 +121,7 @@ const paddingLeft =`${leftPaddCount * 10}px`;
         </div>
         <p className={style.lineCount}>{count}</p>
       </div>
-      <div className={style.childWrapper}>
-        <div
-          className={style.contentAligner}
-          style={{ paddingLeft: paddingLeft! }}
-        >
-          {child}
-        </div>
-      </div>
+      <div className={style.childWrapper}>{child}</div>
     </div>
   );
 }

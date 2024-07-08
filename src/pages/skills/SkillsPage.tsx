@@ -10,7 +10,7 @@ const c: Array<Skill> = [
 function SkillsPage() {
   return (
     <>
-      <JsonTemplate leftPadCount={0} head={{value:"{"}} skills={c}/>
+      <JsonTemplate headderOrFooterPaddLength={0} leftPadCount={1} head={{value:"{"}} skills={c}/>
     </>
 
   );
