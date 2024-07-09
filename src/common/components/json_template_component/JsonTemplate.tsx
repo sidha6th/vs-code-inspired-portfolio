@@ -1,19 +1,15 @@
-import { useRef } from "react";
 import style from "./JsonTemplate.module.css";
+import { JsonT } from "../../types/json_type";
 
-export type Skill = {
-  key: string;
-  value: string | Skill[];
-};
 
 export type JsonTemplateArg = {
-  skills: Skill[];
+  skills: JsonT[];
   initialIndex?: number;
   leftPadCount: number;
   specilChar?: string;
-  border?: boolean;
+  border?:boolean;
   headderOrFooterPaddLength: number;
-  head: { key?: string; value: string };
+  opening: { key?: string; value: string };
   tail?: { key?: string; value: string };
 };
 
@@ -24,10 +20,9 @@ function JsonTemplate(arg: JsonTemplateArg) {
         count={arg.initialIndex ?? 0}
         child={
           <KeyValuePairText
-            leftPadder={<LeftPaddes length={arg.headderOrFooterPaddLength} />}
-            border={arg.border}
-            jsonKey={arg.head.key}
-            value={arg.head.value}
+            leftPadder={<LeftPaddes border={arg.border} length={arg.headderOrFooterPaddLength} />}
+            jsonKey={arg.opening.key}
+            value={arg.opening.value}
           />
         }
       />
@@ -37,9 +32,9 @@ function JsonTemplate(arg: JsonTemplateArg) {
           return (
             <JsonTemplate
               headderOrFooterPaddLength={arg.headderOrFooterPaddLength + 1}
-              border
-              head={{ key: item.key, value: "{" }}
+              opening={{ key: item.key, value: "{" }}
               leftPadCount={arg.leftPadCount + 1}
+              border
               initialIndex={index}
               skills={item.value}
             />
@@ -51,8 +46,7 @@ function JsonTemplate(arg: JsonTemplateArg) {
             count={arg.initialIndex ?? 0 + index}
             child={
               <KeyValuePairText
-                leftPadder={<LeftPaddes length={arg.leftPadCount} />}
-                border
+                leftPadder={<LeftPaddes border length={arg.leftPadCount} />}
                 jsonKey={item.key}
                 value={item.value}
                 key={index}
@@ -65,7 +59,7 @@ function JsonTemplate(arg: JsonTemplateArg) {
         count={arg.initialIndex ?? 0}
         child={
           <KeyValuePairText
-            leftPadder={<LeftPaddes length={arg.headderOrFooterPaddLength} />}
+            leftPadder={<LeftPaddes border={arg.border} length={arg.headderOrFooterPaddLength} />}
             value="}"
           />
         }
@@ -74,10 +68,14 @@ function JsonTemplate(arg: JsonTemplateArg) {
   );
 }
 
-function LeftPaddes(arg: { length: number }) {
+function LeftPaddes(arg: { length: number; border?: boolean }) {
   const paddings: JSX.Element[] = [];
+  const clasName =
+    arg.border ?? false
+      ? style.letPadderWithBorder
+      : style.letPadderWithoutBorder;
   for (let i = 0; i < arg.length; i++) {
-    paddings.push(<div className={style.letPadder} />);
+    paddings.push(<div className={clasName} />);
   }
   return <>{paddings}</>;
 }
@@ -97,7 +95,7 @@ function KeyValuePairText(arg: {
       ) : (
         <>
           <p className={style.key}>{arg.jsonKey}</p>
-          <p content=":">{":"}</p>
+          <p content=":">{":"}{" "}</p>
         </>
       )}
       <p content={arg.specialChar} className={style.value}>

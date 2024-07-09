@@ -47,9 +47,6 @@ div.lineWrapper {
   align-items: center;
 }
 
-p {
-  margin: 2px;
-}
 
 div.childWrapper {
   position: absolute;
@@ -102,9 +99,16 @@ p[content=":"] {
 p[content=","] {
   color: var(--text-gray);
 }
+p{
+  margin: 0;
+  padding: 0;
+}
 
+div.letPadderWithoutBorder {
+  width: 10px;
+}
 
-div.letPadder {
+div.letPadderWithBorder {
   width: 10px;
   border-left: solid 1px var(--line-gray);
 }
