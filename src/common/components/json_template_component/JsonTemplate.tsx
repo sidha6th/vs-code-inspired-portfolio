@@ -1,66 +1,101 @@
-import style from "./JsonTemplate.module.css";
 import { JsonT } from "../../types/json_type";
-
+import SingleLine from "./sub_components/single_line/single_line";
+import LineAligners from "./sub_components/aligner/LineAligner";
+import KeyValuePairTextArranger from "./sub_components/key_value_arranger/KeyValuePairArranger";
 
 export type JsonTemplateArg = {
-  skills: JsonT[];
-  initialIndex?: number;
-  leftPadCount: number;
-  specilChar?: string;
-  border?:boolean;
-  headderOrFooterPaddLength: number;
-  opening: { key?: string; value: string };
-  tail?: { key?: string; value: string };
+  items: JsonT[] | string[];
+  lineCount?: number;
+  leftPadCount?: number;
+  border?: boolean;
+  openingOrClosingPaddingCount?: number;
+  opening?: { key?: string; value: string };
+  closing?: string;
+  commaAfterClosing?: boolean;
 };
 
 function JsonTemplate(arg: JsonTemplateArg) {
+  const paddLeftCount = arg.leftPadCount ?? 1;
+  const openingAndClosingPaddingCount = arg.openingOrClosingPaddingCount ?? 0;
+  var lineCount = arg.lineCount ?? 1;
+
   return (
     <>
       <SingleLine
-        count={arg.initialIndex ?? 0}
+        count={lineCount}
         child={
-          <KeyValuePairText
-            leftPadder={<LeftPaddes border={arg.border} length={arg.headderOrFooterPaddLength} />}
-            jsonKey={arg.opening.key}
-            value={arg.opening.value}
+          <KeyValuePairTextArranger
+            leftPadder={
+              <LineAligners
+                border={arg.border}
+                length={openingAndClosingPaddingCount}
+              />
+            }
+            jsonKey={arg.opening?.key}
+            specialChar={arg.opening?.value ?? "{"}
           />
         }
       />
-      {arg.skills.map((item, index) => {
-        // when there is children
-        if (Array.isArray(item.value)) {
+      {arg.items.map((item, index) => {
+        if (typeof item === "string") {
           return (
-            <JsonTemplate
-              headderOrFooterPaddLength={arg.headderOrFooterPaddLength + 1}
-              opening={{ key: item.key, value: "{" }}
-              leftPadCount={arg.leftPadCount + 1}
-              border
-              initialIndex={index}
-              skills={item.value}
+            <SingleLine
+              count={lineCount++}
+              child={
+                <KeyValuePairTextArranger
+                  leftPadder={
+                    <LineAligners border length={paddLeftCount + 1} />
+                  }
+                  value={item}
+                  key={index}
+                  comma
+                />
+              }
             />
           );
         }
-
+        if (Array.isArray(item.value)) {
+          const isNotJson = typeof item.value[0] === "string";
+          return (
+            <JsonTemplate
+              openingOrClosingPaddingCount={openingAndClosingPaddingCount + 1}
+              opening={{ key: item.key, value: isNotJson ? "[" : "{" }}
+              closing={isNotJson ? "]" : "}"}
+              leftPadCount={isNotJson ? paddLeftCount : paddLeftCount + 1}
+              commaAfterClosing
+              border
+              lineCount={lineCount++}
+              items={item.value}
+            />
+          );
+        }
         return (
           <SingleLine
-            count={arg.initialIndex ?? 0 + index}
+            count={lineCount++}
             child={
-              <KeyValuePairText
-                leftPadder={<LeftPaddes border length={arg.leftPadCount} />}
+              <KeyValuePairTextArranger
+                leftPadder={<LineAligners border length={paddLeftCount} />}
                 jsonKey={item.key}
                 value={item.value}
                 key={index}
+                comma
               />
             }
           />
         );
       })}
       <SingleLine
-        count={arg.initialIndex ?? 0}
+        count={lineCount++}
         child={
-          <KeyValuePairText
-            leftPadder={<LeftPaddes border={arg.border} length={arg.headderOrFooterPaddLength} />}
-            value="}"
+          <KeyValuePairTextArranger
+            leftPadder={
+              <LineAligners
+                border={arg.border}
+                length={openingAndClosingPaddingCount}
+              />
+            }
+            specialChar={arg.closing ?? "}"}
+            comma={arg.commaAfterClosing}
           />
         }
       />
@@ -68,59 +103,4 @@ function JsonTemplate(arg: JsonTemplateArg) {
   );
 }
 
-function LeftPaddes(arg: { length: number; border?: boolean }) {
-  const paddings: JSX.Element[] = [];
-  const clasName =
-    arg.border ?? false
-      ? style.letPadderWithBorder
-      : style.letPadderWithoutBorder;
-  for (let i = 0; i < arg.length; i++) {
-    paddings.push(<div className={clasName} />);
-  }
-  return <>{paddings}</>;
-}
-
-function KeyValuePairText(arg: {
-  jsonKey?: string;
-  value: string;
-  border?: boolean;
-  specialChar?: string;
-  leftPadder?: JSX.Element;
-}) {
-  return (
-    <div className={style.contentAligner}>
-      {arg.leftPadder}
-      {arg.jsonKey == undefined ? (
-        <></>
-      ) : (
-        <>
-          <p className={style.key}>{arg.jsonKey}</p>
-          <p content=":">{":"}{" "}</p>
-        </>
-      )}
-      <p content={arg.specialChar} className={style.value}>
-        {arg.value}
-      </p>
-    </div>
-  );
-}
-
-type SingleLineArg = {
-  child: JSX.Element;
-  count: number;
-};
-
-function SingleLine({ child, count }: SingleLineArg) {
-  return (
-    <div className={style.SingleLine}>
-      <div className={style.lineCountIndicator}>
-        <div className={style.breakPointWrapper}>
-          <div className={style.breakPoint}></div>
-        </div>
-        <p className={style.lineCount}>{count}</p>
-      </div>
-      <div className={style.childWrapper}>{child}</div>
-    </div>
-  );
-}
 export default JsonTemplate;

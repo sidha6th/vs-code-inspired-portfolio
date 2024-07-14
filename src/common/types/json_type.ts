@@ -1,4 +1,4 @@
-export type JsonT = {
+export type JsonT ={
     key: string;
-    value: string | JsonT[];
+    value: string | JsonT[]|Array<string>;
   };

@@ -1,0 +1,42 @@
+div.contentAligner {
+  display: flex;
+  padding-left: 0px;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+p.value {
+  color: var(--json-value);
+}
+
+p.key {
+  color: var(--json-key);
+}
+
+p[content="{"] {
+  color: var(--curly-braces);
+}
+
+p[content="}"] {
+  color: var(--curly-braces);
+}
+
+p[content="["] {
+  color: var(--curly-braces);
+}
+
+p[content="]"] {
+  color: var(--curly-braces);
+}
+
+p[content=":"] {
+  margin-right: var(--space-width);
+  color: var(--text-gray);
+}
+
+p[content=","] {
+  color: var(--text-gray);
+}
