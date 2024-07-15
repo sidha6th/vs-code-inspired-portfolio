@@ -4,6 +4,7 @@ div.contentAligner {
 }
 
 p {
+  user-select: text;
   margin: 0;
   padding: 0;
 }

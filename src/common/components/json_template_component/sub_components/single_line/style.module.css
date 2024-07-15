@@ -34,6 +34,7 @@ div.SingleLine {
   p.lineCount {
     color: var(--line-gray);
     font-size: 15px;
+    user-select: none;
     margin: 0;
   }
   

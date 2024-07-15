@@ -17,12 +17,12 @@ export type JsonTemplateArg = {
 function JsonTemplate(arg: JsonTemplateArg) {
   const paddLeftCount = arg.leftPadCount ?? 1;
   const openingAndClosingPaddingCount = arg.openingOrClosingPaddingCount ?? 0;
-  var lineCount = arg.lineCount ?? 1;
+  var lineCount = arg.lineCount ?? 0;
 
   return (
     <>
       <SingleLine
-        count={lineCount}
+        count={++lineCount}
         child={
           <KeyValuePairTextArranger
             leftPadder={
@@ -40,7 +40,7 @@ function JsonTemplate(arg: JsonTemplateArg) {
         if (typeof item === "string") {
           return (
             <SingleLine
-              count={lineCount++}
+              count={++lineCount}
               child={
                 <KeyValuePairTextArranger
                   leftPadder={
@@ -54,24 +54,27 @@ function JsonTemplate(arg: JsonTemplateArg) {
             />
           );
         }
+
         if (Array.isArray(item.value)) {
           const isNotJson = typeof item.value[0] === "string";
           return (
             <JsonTemplate
               openingOrClosingPaddingCount={openingAndClosingPaddingCount + 1}
+              leftPadCount={isNotJson ? paddLeftCount : paddLeftCount + 1}
               opening={{ key: item.key, value: isNotJson ? "[" : "{" }}
               closing={isNotJson ? "]" : "}"}
-              leftPadCount={isNotJson ? paddLeftCount : paddLeftCount + 1}
-              commaAfterClosing
-              border
               lineCount={lineCount++}
               items={item.value}
+              commaAfterClosing
+              border
             />
           );
         }
+
+        /// used to display similar to ["key:value"]
         return (
           <SingleLine
-            count={lineCount++}
+            count={++lineCount}
             child={
               <KeyValuePairTextArranger
                 leftPadder={<LineAligners border length={paddLeftCount} />}
@@ -85,7 +88,7 @@ function JsonTemplate(arg: JsonTemplateArg) {
         );
       })}
       <SingleLine
-        count={lineCount++}
+        count={++lineCount}
         child={
           <KeyValuePairTextArranger
             leftPadder={

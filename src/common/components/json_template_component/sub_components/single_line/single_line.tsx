@@ -5,14 +5,16 @@ type SingleLineArg = {
   count: number;
 };
 
-function SingleLine({ child, count }: SingleLineArg) {
+var c =0;
+
+function SingleLine({ child }: SingleLineArg) {
   return (
     <div className={style.SingleLine}>
       <div className={style.lineCountIndicator}>
         <div className={style.breakPointWrapper}>
           <div className={style.breakPoint}></div>
         </div>
-        <p className={style.lineCount}>{count}</p>
+        <p className={style.lineCount}>{c++}</p>
       </div>
       <div className={style.childWrapper}>{child}</div>
     </div>
