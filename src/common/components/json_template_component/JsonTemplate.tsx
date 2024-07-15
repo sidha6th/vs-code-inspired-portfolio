@@ -1,11 +1,11 @@
 import { JsonT } from "../../types/json_type";
-import SingleLine from "./sub_components/single_line/single_line";
+import SingleLine, { LineCount } from "./sub_components/single_line/single_line";
 import LineAligners from "./sub_components/aligner/LineAligner";
 import KeyValuePairTextArranger from "./sub_components/key_value_arranger/KeyValuePairArranger";
 
 export type JsonTemplateArg = {
   items: JsonT[] | string[];
-  lineCount?: number;
+  lineCount?: LineCount;
   leftPadCount?: number;
   border?: boolean;
   openingOrClosingPaddingCount?: number;
@@ -14,15 +14,17 @@ export type JsonTemplateArg = {
   commaAfterClosing?: boolean;
 };
 
+
+
 function JsonTemplate(arg: JsonTemplateArg) {
   const paddLeftCount = arg.leftPadCount ?? 1;
   const openingAndClosingPaddingCount = arg.openingOrClosingPaddingCount ?? 0;
-  var lineCount = arg.lineCount ?? 0;
+  var lineCount = arg.lineCount ?? new LineCount();
 
   return (
     <>
       <SingleLine
-        count={++lineCount}
+        count={lineCount}
         child={
           <KeyValuePairTextArranger
             leftPadder={
@@ -40,7 +42,7 @@ function JsonTemplate(arg: JsonTemplateArg) {
         if (typeof item === "string") {
           return (
             <SingleLine
-              count={++lineCount}
+              count={lineCount}
               child={
                 <KeyValuePairTextArranger
                   leftPadder={
@@ -63,7 +65,7 @@ function JsonTemplate(arg: JsonTemplateArg) {
               leftPadCount={isNotJson ? paddLeftCount : paddLeftCount + 1}
               opening={{ key: item.key, value: isNotJson ? "[" : "{" }}
               closing={isNotJson ? "]" : "}"}
-              lineCount={lineCount++}
+              lineCount={lineCount}
               items={item.value}
               commaAfterClosing
               border
@@ -74,7 +76,7 @@ function JsonTemplate(arg: JsonTemplateArg) {
         /// used to display similar to ["key:value"]
         return (
           <SingleLine
-            count={++lineCount}
+            count={lineCount}
             child={
               <KeyValuePairTextArranger
                 leftPadder={<LineAligners border length={paddLeftCount} />}
@@ -88,7 +90,7 @@ function JsonTemplate(arg: JsonTemplateArg) {
         );
       })}
       <SingleLine
-        count={++lineCount}
+        count={lineCount}
         child={
           <KeyValuePairTextArranger
             leftPadder={
