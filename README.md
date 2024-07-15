@@ -13,9 +13,6 @@
   <a href="https://www.hackerrank.com/sidha6th" target="blank"><img align="center"
       src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/hackerrank.svg"
       alt="hackerrank" height="30" width="40" /></a>
-<a href="https://leetcode.com/Mohammed-Shahul-P-M/" target="blank"><img align="center"
-      src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/leet-code.svg"
-      alt="Leetcode" height="30" width="40" /></a>
 </p>
 
 <br>
