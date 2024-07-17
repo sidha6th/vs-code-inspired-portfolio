@@ -1,65 +1,47 @@
-import { useEffect, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Explore } from "../svg";
 import style from "./SideBar.module.scss";
-import { toggleWorkbenchVisiblity } from "../../helpers/work_bench_helpers";
+import { RootState } from "../../../core/store/store";
+import { changeTab, toggleWorkbenchVisiblity } from "../../slices/side_bar_slice";
 
 export default function SideBar() {
-  const exploreButtonRef = useRef<HTMLDivElement>(null);
-  const codeButtonRef = useRef<HTMLDivElement>(null);
-  const settingsButtonRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    _toggleActiveState(null, 0);
-  }, []);
+  const state = useSelector((state: RootState) => state.sidebarSlice);
+  const dispatch = useDispatch();
+  const tabs = ["Explore", "Connect me", "Settings"];
 
   return (
     <div id={style.sideBar}>
-      <div
-        ref={exploreButtonRef}
-        className={style.sideBarButton}
-        onClick={() =>
-          onClick(exploreButtonRef.current, _onClickExplorerButton)
-        }
-      >
-        <Explore />
-      </div>
-      <div
-        ref={codeButtonRef}
-        className={style.sideBarButton}
-        onClick={() => onClick(codeButtonRef.current)}
-      >
-        <Explore />
-      </div>
-      <div
-        ref={settingsButtonRef}
-        className={style.sideBarButton}
-        onClick={() => onClick(settingsButtonRef.current)}
-      >
-        <Explore />
-      </div>
+      {tabs.map((_, index) => (
+        <Tab
+          isActive={index == state.activeTabIndex}
+          onclick={() => onChangeTab(index)}
+          child={<Explore />}
+          key={index}
+        />
+      ))}
     </div>
   );
 
-  function _onClickExplorerButton() {
-    toggleWorkbenchVisiblity();
-  }
-  function onClick(element: HTMLDivElement | null, cb?: () => void) {
-    cb?.call(cb);
-    _toggleActiveState(element);
-  }
-
-  function _toggleActiveState(
-    element: HTMLDivElement | null,
-    index?: number | undefined
-  ) {
-    const buttons = document.getElementsByClassName(style.sideBarButton);
-    if (index != undefined) {
-      buttons.item(index)?.classList.add(style.active);
+  function onChangeTab(index: number) {
+    if (state.activeTabIndex === index) {
+      dispatch(toggleWorkbenchVisiblity());
       return;
     }
-    for (let index = 0; index < buttons.length; index++) {
-      buttons.item(index)?.classList.remove(style.active);
-    }
-    element?.classList.add(style.active);
+    dispatch(changeTab(index));
   }
+}
+
+function Tab(arg: {
+  isActive: boolean;
+  onclick: () => void;
+  child: JSX.Element;
+}) {
+  return (
+    <div
+      className={arg.isActive ? style.activeTab : style.tab}
+      onClick={arg.onclick}
+    >
+      {arg.child}
+    </div>
+  );
 }

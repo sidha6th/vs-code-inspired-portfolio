@@ -1,12 +1,12 @@
 import style from "./ReadMePage.module.scss";
 import wave from "../../assets/gif/wave.gif";
 import { ReadMeSection } from "./components/readme_section/ReadMeSection.tsx";
-import IntroSection from "./components/image_animation_section/IntroSection.tsx";
+// import IntroSection from "./components/image_animation_section/IntroSection.tsx";
 
 function ReadMePage() {
   return (
     <div id={style.page}>
-      <IntroSection/>
+      {/* <IntroSection/> */}
       <ReadMeSection
         title={
           <h1 className={style.title}>
@@ -26,7 +26,7 @@ function ReadMePage() {
           web development.`}
       />
       <ReadMeSection
-        title={<h1 className={style.title}>Skills 🔑</h1>}
+        title={<h1 className={style.title}>Skills <span>🔑</span></h1>}
         content="With 2 years of dedicated experience in Flutter development, I've
           honed my skills to deliver robust, cross-platform applications that
           seamlessly blend performance and aesthetics. My expertise extends

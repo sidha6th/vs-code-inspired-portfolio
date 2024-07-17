@@ -1,8 +1,14 @@
 import { useEffect, useRef } from "react";
-import  "./ResizableComponent.scss";
+import { useSelector, useDispatch } from "react-redux";
+import "./ResizableComponent.scss";
 import React from "react";
 import Constants from "../../../constants/Constants";
-import { displayWorkBench, hideWorkBench, setOrGetWidth, updateStyle } from "../../helpers/work_bench_helpers";
+import { setOrGetWidth, updateStyle } from "../../helpers/work_bench_helpers";
+import { RootState } from "../../../core/store/store";
+import {
+  toggleOverlayState,
+  WorkBenchVisiblityState,
+} from "../../slices/side_bar_slice";
 
 type ResizableComponentArg = {
   child: JSX.Element;
@@ -11,42 +17,57 @@ type ResizableComponentArg = {
 
 export function ResizableComponent(arg: ResizableComponentArg) {
   const resizableHandle = useRef<HTMLDivElement>(null);
+  const workbenchRef = useRef<HTMLDivElement>(null);
+  const dispatch = useDispatch();
+  const displayingState = useSelector(
+    (state: RootState) => state.sidebarSlice.workBenchVisiblity
+  );
+
   let initialWidth =
     setOrGetWidth() ?? Constants.dimension.workBenchDefaultWidth;
   let xCor = useRef(initialWidth);
   let width = useRef(initialWidth);
-  useEffect(() => {
-    window.addEventListener("resize", listenWidnowResize);
-  });
+  useEffect(() => window.addEventListener("resize", listenWidnowResize));
   useEffect(() => updateStyle(initialWidth), [initialWidth]);
+  useEffect(toggleVisiblity, [displayingState]);
 
   return (
-    <div id='resizableWorkBench' className='resizable'>
+    <div ref={workbenchRef} id="resizableWorkBench" className={`resizable`}>
       {arg.child}
-      <div
-        ref={resizableHandle}
-        id='dragger'
-        onMouseDown={onMouseDown}
-      ></div>
+      <div ref={resizableHandle} id="dragger" onMouseDown={onMouseDown}></div>
     </div>
   );
 
+  function listenWidnowResize() {
+    if (
+      window.innerWidth - width.current <
+      Constants.dimension.minVWToDisplyWorkbench
+    ) {
+      dispatch(toggleOverlayState(WorkBenchVisiblityState.overlayed));
+      return;
+    }
+    dispatch(toggleOverlayState());
+  }
 
-  function listenWidnowResize(e: UIEvent) {
-    if (e.currentTarget instanceof Window) {
-      if (
-        window.innerWidth - width.current <
-        Constants.dimension.minVWToDisplyWorkbench
-      ) {
-        hideWorkBench();
-      }else{
-        displayWorkBench()
-      }
+  function toggleVisiblity() {
+    switch (displayingState) {
+      case WorkBenchVisiblityState.hidden:
+        workbenchRef.current?.classList.add("hidden");
+        workbenchRef.current?.classList.remove("overlayed");
+        break;
+      case WorkBenchVisiblityState.overlayed:
+        workbenchRef.current?.classList.remove("hidden");
+        workbenchRef.current?.classList.add("overlayed");
+        break;
+      default:
+        workbenchRef.current?.classList.remove("hidden");
+        workbenchRef.current?.classList.remove("overlayed");
+        break;
     }
   }
 
   function isMinOrMax(currentWidth: number) {
-   return currentWidth < 160 || window.innerWidth - currentWidth < 500
+    return currentWidth < 160 || window.innerWidth - currentWidth < 500;
   }
 
   function onMouseMove(e: MouseEvent) {

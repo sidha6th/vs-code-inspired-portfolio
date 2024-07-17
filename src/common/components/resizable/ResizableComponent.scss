@@ -1,17 +1,22 @@
 div#resizableWorkBench.overlayed {
-    position: relative;
-    height: 100%;
-    width: 100%;
+    position: absolute;
+    z-index: 1;
+    top: var(--top-bar-height);
+    left: var(--side-bar-width);
+    height: calc(100% - (var(--bottom-bar-height) + var(--top-bar-height)));
+    width: var(--work-bench-width);
+    flex-shrink: 0;
     display: flex;
 }
 
-#resizableWorkBench.hide {
+#resizableWorkBench.hidden {
     height: 100%;
     width: 0;
     display: flex;
 }
 
 .resizable {
+    position: relative;
     height: 100%;
     width: var(--work-bench-width);
     flex-shrink: 0;

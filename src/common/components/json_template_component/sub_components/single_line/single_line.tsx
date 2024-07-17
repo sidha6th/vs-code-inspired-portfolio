@@ -8,11 +8,7 @@ type SingleLineArg = {
 export class LineCount {
   private count: number;
   constructor() {
-    this.count = 0;
-  }
-
-  public increment() {
-    this.count++;
+    this.count = 1;
   }
 
   public get value(): number {

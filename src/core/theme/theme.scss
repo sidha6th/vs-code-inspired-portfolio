@@ -42,17 +42,30 @@
   @include dimensions();
   @include comonColor();
 }
-
-[data-theme="dracula"] {
-  --bottom-bar-bg: #fdfdfd;
-  --editor-bg: #1b1b1b;
-  --side-bar-bg: #2c2c2c;
-  --top-bar-bg: #333333;
-  --side-panel-bg: #282a36;
+[data-theme="light"] {
+  --root-bg: #fdfdfd;
+  --text: #080808;
+  --primary-white: rgb(238, 236, 236);
+  --top-bar-bg: #ffffff;
+  --line-gray: #e0e0e0;
+  --text-gray: #778477;
+  --bottom-bar-bg: #0776c7;
+  --editor-bg: #ffffff;
+  --side-bar-bg: #f0f0f0;
+  --side-panel-bg: #ffffff;
+  --scroll-bar-bg: #e0e0e0;
   --main-bg: var(--side-panel-bg);
-  --scroll-bar-bg: #262626;
+  --image-bg: #f5f5f5;
   --red: #ed484f;
   --yellow: #f8b42b;
   --green: #27d93b;
-  @include dimensions()
+
+  // json
+  --curly-braces: #dad424;
+  --json-value: #c06031;
+  --json-key: #8fdcdb;
+
+  //
+  @include dimensions();
+  @include comonColor();
 }

@@ -11,13 +11,14 @@ $buttonPaddig: 10px;
   overflow-y: auto;
 }
 
-.sideBarButton {
+.tab {
   padding: $buttonPaddig $buttonPaddig $buttonPaddig calc($buttonPaddig - $borderWidth);
   border-left: solid $borderWidth var(--side-bar-bg);
 }
 
-.sideBarButton.active {
+.activeTab {
   transition: border 1s;
+  padding: $buttonPaddig $buttonPaddig $buttonPaddig calc($buttonPaddig - $borderWidth);
   border-left: solid $borderWidth var(--bottom-bar-bg);
 }
 

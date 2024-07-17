@@ -1,8 +1,8 @@
 #topbar {
   background-color: var(--top-bar-bg);
   height: var(--top-bar-height);
-  border-radius: 10px 10px 0px 0px;
-  display: block;
+  display: flex;
+  align-items: center;
   padding-left: 10px;
 }
 

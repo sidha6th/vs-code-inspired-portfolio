@@ -1,4 +1,3 @@
-import Constants from "../../constants/Constants";
 
 export function setOrGetWidth(currentWidth?: number) {
   const key = "work-bench-width";
@@ -18,30 +17,4 @@ export function updateStyle(width: number) {
     `${width}px`
   );
   setOrGetWidth(width);
-}
-
-export function hideWorkBench() {
-  const workBench = document.getElementById("resizableWorkBench");
-  workBench?.classList.remove("overlayed");
-  workBench?.classList.add("hide");
-}
-export function displayWorkBench() {
-  const workBench = document.getElementById("resizableWorkBench");
-  const workBenchWidth = setOrGetWidth()
-  if (window.innerWidth -(workBenchWidth??0) < Constants.dimension.minVWToDisplyWorkbench) {
-  workBench?.classList.remove("hide");
-    workBench?.classList.add("overlayed");
-    return;
-  }
-  workBench?.classList.remove("hide");
-  workBench?.classList.remove("overlayed");
-}
-
-export function toggleWorkbenchVisiblity() {
-  const workBench = document.getElementById("resizableWorkBench");
-  if (workBench?.classList.contains("hide")) {
-    displayWorkBench();
-  } else {
-    hideWorkBench();
-  }
 }
