@@ -22,11 +22,12 @@ div#resizableWorkBench.overlayed {
     height: 100%;
     width: var(--work-bench-width);
     flex-shrink: 0;
+    transition: all 0.1s;
     display: flex;
 }
 
 #dragger {
-    transition: all 0.5s;
+    transition: all 0.2s;
     width: var(--resizable-drager-width);
     height: 100%;
     background-color: var(--side-panel-bg);

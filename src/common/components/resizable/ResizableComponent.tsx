@@ -7,7 +7,6 @@ import { setOrGetWidth, updateStyle } from "../../helpers/work_bench_helpers";
 import { RootState } from "../../../core/store/store";
 import {
   setDisplayingState,
-  toggleWorkbenchVisiblity,
   WorkBenchVisiblityState,
 } from "../../slices/side_bar_slice";
 
