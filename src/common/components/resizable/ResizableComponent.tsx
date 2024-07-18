@@ -6,7 +6,8 @@ import Constants from "../../../constants/Constants";
 import { setOrGetWidth, updateStyle } from "../../helpers/work_bench_helpers";
 import { RootState } from "../../../core/store/store";
 import {
-  toggleOverlayState,
+  setDisplayingState,
+  toggleWorkbenchVisiblity,
   WorkBenchVisiblityState,
 } from "../../slices/side_bar_slice";
 
@@ -27,9 +28,17 @@ export function ResizableComponent(arg: ResizableComponentArg) {
     setOrGetWidth() ?? Constants.dimension.workBenchDefaultWidth;
   let xCor = useRef(initialWidth);
   let width = useRef(initialWidth);
-  useEffect(() => window.addEventListener("resize", listenWidnowResize),[]);
+  let preWidth = useRef(0);
+  useEffect(() => window.addEventListener("resize", onResizeWindow), []);
   useEffect(() => updateStyle(initialWidth), [initialWidth]);
-  useEffect(changeStateAsOverlayed, []);
+  useEffect(onResizeWindow, []);
+  useEffect(() => {
+    preWidth.current = window.innerWidth;
+  }, []);
+
+  const willFit = () =>
+    window.innerWidth - width.current >
+    Constants.dimension.minVWToDisplyWorkbench;
 
   return (
     <div
@@ -42,38 +51,27 @@ export function ResizableComponent(arg: ResizableComponentArg) {
     </div>
   );
 
-  function listenWidnowResize() {
-    changeStateAsOverlayed();
-  }
-
-  function getClass() {
-    switch (displayingState) {
-      case WorkBenchVisiblityState.hidden:
-        return "hidden";
-      case WorkBenchVisiblityState.overlayed:
-        return "overlayed";
-      default:
-        if (_willNotFit()) {
-          dispatch(toggleOverlayState(WorkBenchVisiblityState.overlayed));
-          return "overlayed";
-        }
-        return "";
+  function onResizeWindow() {
+    const isDragingRight = isIncreasingWidth();
+    if (isDragingRight) {
+      if (displayingState === WorkBenchVisiblityState.hidden) {
+        dispatch(setDisplayingState());
+      }
+    } else {
+      if (!willFit() && displayingState != WorkBenchVisiblityState.hidden) {
+        dispatch(setDisplayingState(WorkBenchVisiblityState.hidden));
+        return;
+      }
     }
   }
 
-  function _willNotFit() {
-    return (
-      window.innerWidth - width.current <
-      Constants.dimension.minVWToDisplyWorkbench
-    );
-  }
-
-  function changeStateAsOverlayed() {
-    if (_willNotFit() && displayingState != WorkBenchVisiblityState.overlayed) {
-      dispatch(toggleOverlayState(WorkBenchVisiblityState.overlayed));
-      return;
+  function isIncreasingWidth() {
+    const currentWidth = window.innerWidth;
+    const result = currentWidth > preWidth.current;
+    if (currentWidth != preWidth.current) {
+      preWidth.current = currentWidth;
     }
-    dispatch(toggleOverlayState(displayingState));
+    return result;
   }
 
   function isMinOrMax(currentWidth: number) {
@@ -103,5 +101,20 @@ export function ResizableComponent(arg: ResizableComponentArg) {
     xCor.current = e.clientX;
     document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("mouseup", onMouseUp);
+  }
+
+  function getClass() {
+    switch (displayingState) {
+      case WorkBenchVisiblityState.hidden:
+        return "hidden";
+      case WorkBenchVisiblityState.overlayed:
+        return "overlayed";
+      default:
+        if (!willFit()) {
+          dispatch(setDisplayingState(WorkBenchVisiblityState.overlayed));
+          return "overlayed";
+        }
+        return "";
+    }
   }
 }

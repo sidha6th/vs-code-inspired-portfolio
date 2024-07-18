@@ -3,16 +3,18 @@ div#resizableWorkBench.overlayed {
     z-index: 1;
     top: var(--top-bar-height);
     left: var(--side-bar-width);
-    height: calc(100% - (var(--bottom-bar-height) + var(--top-bar-height)));
     width: var(--work-bench-width);
+    height: calc(100% - (var(--bottom-bar-height) + var(--top-bar-height)));
     flex-shrink: 0;
     display: flex;
+    @media (max-width: 400px) {
+        width: 100%;
+    }
 }
 
 #resizableWorkBench.hidden {
-    height: 100%;
+    visibility: hidden;
     width: 0;
-    display: flex;
 }
 
 .resizable {

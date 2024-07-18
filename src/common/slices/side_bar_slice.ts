@@ -26,7 +26,7 @@ export const sideBarSlice = createSlice({
       }
       state.workBenchVisiblity = undefined;
     },
-    toggleOverlayState: (
+    setDisplayingState: (
       state,
       { payload }: PayloadAction<WorkBenchVisiblityState | undefined>
     ) => {
@@ -41,7 +41,7 @@ export const sideBarSlice = createSlice({
 
 export const {
   changeTab,
-  toggleOverlayState,
+  setDisplayingState,
   toggleWorkbenchVisiblity,
 } = sideBarSlice.actions;
 
