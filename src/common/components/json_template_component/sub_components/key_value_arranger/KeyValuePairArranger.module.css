@@ -41,3 +41,19 @@ p[content=":"] {
 p[content=","] {
   color: var(--text-gray);
 }
+
+/* 
+::selection {
+  color: white; 
+  background: var(--text-gray); 
+}
+
+::-webkit-selection {
+  color: white;
+  background: var(--text-gray);
+}
+
+::-moz-selection {
+  color: white;
+  background: var(--text-gray);
+} */

@@ -7,7 +7,7 @@ export function WorkBench(arg: { child: JSX.Element }) {
       child={
         <div id={style.workbench}>
           <div className={style.titleBox}>
-            <p className={style.workBenchTitle}>Explore</p>
+            <p className={style.workBenchTitle}>EXPLORER</p>
           </div>
           <div className="expansion-tile-list">{arg.child}</div>
         </div>

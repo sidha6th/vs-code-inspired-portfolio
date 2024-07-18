@@ -8,19 +8,20 @@
   flex-direction: column;
 }
 
-.title-box{
+.titleBox {
   display: flex;
-  flex-direction: row;
+  height: calc(var(--top-bar-height) + 10px);
+  padding-left: 10px;
   align-items: center;
-  height: 50px;
-  padding: 0px 10px 0px 10px;
-  justify-content: space-between;
 }
 
 .titleBox>.workBenchTitle {
-  font-size: 10px;
-  font-weight: 100;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  font-weight: 300;
+  color: var(--text);
 }
-.expansionTileList{
+
+.expansionTileList {
   overflow: auto;
 }
