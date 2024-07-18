@@ -1,4 +1,4 @@
-type Theme = "dark" | "dracula";
+type Theme = "dark" | "light";
  function setTheme(theme?: Theme) {
   const key = "theme";
   const _theme = theme ?? localStorage.getItem(key) ?? "dark";

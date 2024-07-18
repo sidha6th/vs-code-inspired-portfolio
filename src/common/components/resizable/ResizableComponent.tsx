@@ -29,41 +29,50 @@ export function ResizableComponent(arg: ResizableComponentArg) {
   let width = useRef(initialWidth);
   useEffect(() => window.addEventListener("resize", listenWidnowResize));
   useEffect(() => updateStyle(initialWidth), [initialWidth]);
-  useEffect(toggleVisiblity, [displayingState]);
+  useEffect(changeStateAsOverlayed, []);
 
   return (
-    <div ref={workbenchRef} id="resizableWorkBench" className={`resizable`}>
+    <div
+      ref={workbenchRef}
+      id="resizableWorkBench"
+      className={`resizable ${getClass()}`}
+    >
       {arg.child}
       <div ref={resizableHandle} id="dragger" onMouseDown={onMouseDown}></div>
     </div>
   );
 
   function listenWidnowResize() {
-    if (
-      window.innerWidth - width.current <
-      Constants.dimension.minVWToDisplyWorkbench
-    ) {
-      dispatch(toggleOverlayState(WorkBenchVisiblityState.overlayed));
-      return;
-    }
-    dispatch(toggleOverlayState());
+    changeStateAsOverlayed();
   }
 
-  function toggleVisiblity() {
+  function getClass() {
     switch (displayingState) {
       case WorkBenchVisiblityState.hidden:
-        workbenchRef.current?.classList.add("hidden");
-        workbenchRef.current?.classList.remove("overlayed");
-        break;
+        return "hidden";
       case WorkBenchVisiblityState.overlayed:
-        workbenchRef.current?.classList.remove("hidden");
-        workbenchRef.current?.classList.add("overlayed");
-        break;
+        return "overlayed";
       default:
-        workbenchRef.current?.classList.remove("hidden");
-        workbenchRef.current?.classList.remove("overlayed");
-        break;
+        if (_willNotFit()) {
+          dispatch(toggleOverlayState(WorkBenchVisiblityState.overlayed));
+          return "overlayed";
+        }
+        return "";
     }
+  }
+
+  function _willNotFit() {
+    return (
+      window.innerWidth - width.current <
+      Constants.dimension.minVWToDisplyWorkbench
+    );
+  }
+
+  function changeStateAsOverlayed() {
+    if (_willNotFit()) {
+      dispatch(toggleOverlayState(WorkBenchVisiblityState.overlayed));
+    }
+    dispatch(toggleOverlayState(displayingState));
   }
 
   function isMinOrMax(currentWidth: number) {

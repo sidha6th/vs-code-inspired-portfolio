@@ -7,7 +7,7 @@ function LineAligners(arg: { length: number; border?: boolean }) {
         ? style.letPadderWithBorder
         : style.letPadderWithoutBorder;
     for (let i = 0; i < arg.length; i++) {
-      paddings.push(<div className={clasName} />);
+      paddings.push(<div className={clasName} key={i}/>);
     }
     return <>{paddings}</>;
   }

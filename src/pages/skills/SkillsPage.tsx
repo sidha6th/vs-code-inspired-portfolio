@@ -5,7 +5,7 @@ import { skills } from "../../core/pages_data/skills";
 function SkillsPage() {
   return (
     <div className={style.page}>
-      <JsonTemplate items={skills} />
+      <JsonTemplate items={skills} key={-1}/>
     </div>
   );
 }

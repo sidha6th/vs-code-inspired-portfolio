@@ -1,5 +1,7 @@
 import { JsonT } from "../../types/json_type";
-import SingleLine, { LineCount } from "./sub_components/single_line/single_line";
+import SingleLine, {
+  LineCount,
+} from "./sub_components/single_line/single_line";
 import LineAligners from "./sub_components/aligner/LineAligner";
 import KeyValuePairTextArranger from "./sub_components/key_value_arranger/KeyValuePairArranger";
 
@@ -14,8 +16,6 @@ export type JsonTemplateArg = {
   commaAfterClosing?: boolean;
 };
 
-
-
 function JsonTemplate(arg: JsonTemplateArg) {
   const paddLeftCount = arg.leftPadCount ?? 1;
   const openingAndClosingPaddingCount = arg.openingOrClosingPaddingCount ?? 0;
@@ -24,6 +24,7 @@ function JsonTemplate(arg: JsonTemplateArg) {
   return (
     <>
       <SingleLine
+      key={arg.opening?.key}
         count={lineCount}
         child={
           <KeyValuePairTextArranger
@@ -68,6 +69,7 @@ function JsonTemplate(arg: JsonTemplateArg) {
               lineCount={lineCount}
               items={item.value}
               commaAfterClosing
+              key={index}
               border
             />
           );
@@ -82,7 +84,7 @@ function JsonTemplate(arg: JsonTemplateArg) {
                 leftPadder={<LineAligners border length={paddLeftCount} />}
                 jsonKey={item.key}
                 value={item.value}
-                key={index}
+                key={index + 1}
                 comma
               />
             }

@@ -17,3 +17,11 @@
     text-align: justify;
     font-family: Consolas, Courier New, monospace;
   }
+
+  path{
+    fill: var(--icon-color);
+  }
+  
+  svg:hover>path{
+    fill: var(--primary-white);
+  }
