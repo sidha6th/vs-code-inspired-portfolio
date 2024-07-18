@@ -57,7 +57,6 @@ function JsonTemplate(arg: JsonTemplateArg) {
             />
           );
         }
-
         if (Array.isArray(item.value)) {
           const isNotJson = typeof item.value[0] === "string";
           return (
@@ -69,7 +68,6 @@ function JsonTemplate(arg: JsonTemplateArg) {
               lineCount={lineCount}
               items={item.value}
               commaAfterClosing
-              key={index}
               border
             />
           );

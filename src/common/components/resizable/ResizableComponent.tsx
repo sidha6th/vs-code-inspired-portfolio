@@ -27,7 +27,7 @@ export function ResizableComponent(arg: ResizableComponentArg) {
     setOrGetWidth() ?? Constants.dimension.workBenchDefaultWidth;
   let xCor = useRef(initialWidth);
   let width = useRef(initialWidth);
-  useEffect(() => window.addEventListener("resize", listenWidnowResize));
+  useEffect(() => window.addEventListener("resize", listenWidnowResize),[]);
   useEffect(() => updateStyle(initialWidth), [initialWidth]);
   useEffect(changeStateAsOverlayed, []);
 
@@ -69,8 +69,9 @@ export function ResizableComponent(arg: ResizableComponentArg) {
   }
 
   function changeStateAsOverlayed() {
-    if (_willNotFit()) {
+    if (_willNotFit() && displayingState != WorkBenchVisiblityState.overlayed) {
       dispatch(toggleOverlayState(WorkBenchVisiblityState.overlayed));
+      return;
     }
     dispatch(toggleOverlayState(displayingState));
   }
