@@ -1,33 +1,44 @@
-import { useEffect, useState } from "react";
-import { ExpansionTileListView } from "../../../../common/components/expansion_tile_list_view/ExpansionTileListView";
+import { useRef } from "react";
 import SideBar from "../../../../common/components/side_bar/SideBar";
 import { EditorsViewHolder } from "../editors_view_holder/EditorsViewHolder";
 import { WorkBench } from "../workbench/WorkBench";
 import style from "./DashboardBody.module.css";
-import { root } from "../../../../core/route/work_bench_setup";
-import WorkBenchElements from "../../../../core/config/work_bench_config";
+import SourceControlSVG from "../../../../common/components/svg/SourceControl";
+import PostmanSVG from "../../../../common/components/svg/Postman";
+import { explorerPages } from "../../../../core/pages_data/explorer_pages";
+import ExploreSVG from "../../../../common/components/svg/Explore";
+import { Explorer } from "../../../../common/components/explorer/Explorer";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../core/store/store";
 
 export default function DashboardBody() {
-  const [state, setState] = useState<WorkBenchElements>();
-  useEffect(() => {
-    if (state == undefined) {
-      setState(root);
-    }
-  }, [state]);
+  const tabsRef = useRef([
+    { child: <ExploreSVG />, onClick: () => {} },
+    { child: <SourceControlSVG />, onClick: () => {} },
+    { child: <PostmanSVG />, onClick: () => {} },
+  ]);
+  const workBenchChilds = useRef([
+    { child: <Explorer />, title: "EXPLORER" },
+    { child: <Explorer />, title: "SOURCE CONTROL" },
+    { child: <PostmanWorkBench />, title: "POSTMAN" },
+  ]);
+
+  const tabIndex = useSelector(
+    (state: RootState) => state.sidebarSlice.activeTabIndex
+  );
 
   return (
     <div className={style.body}>
-      <SideBar />
+      <SideBar tabs={tabsRef.current} />
       <WorkBench
-        child={
-          <ExpansionTileListView
-            parentPath="/"
-            nodes={Array.from(state?.node?.entries() ?? [])}
-            padLeftCount={0}
-          />
-        }
+        child={workBenchChilds.current[tabIndex].child}
+        title={workBenchChilds.current[tabIndex].title}
       />
-      <EditorsViewHolder />
+      <EditorsViewHolder pages={explorerPages} />
     </div>
   );
+}
+
+function PostmanWorkBench() {
+  return <></>;
 }

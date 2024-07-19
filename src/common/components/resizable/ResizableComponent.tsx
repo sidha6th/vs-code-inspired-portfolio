@@ -16,66 +16,34 @@ type ResizableComponentArg = {
 };
 
 export function ResizableComponent(arg: ResizableComponentArg) {
+  const initialWidth =
+    setOrGetWidth() ?? Constants.dimension.workBenchDefaultWidth;
   const resizableHandle = useRef<HTMLDivElement>(null);
   const workbenchRef = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
+  const xCor = useRef(initialWidth);
+  const width = useRef(initialWidth);
+  const preWidth = useRef(0);
   const displayingState = useSelector(
     (state: RootState) => state.sidebarSlice.workBenchVisiblity
   );
-
-  let initialWidth =
-    setOrGetWidth() ?? Constants.dimension.workBenchDefaultWidth;
-  let xCor = useRef(initialWidth);
-  let width = useRef(initialWidth);
-  let preWidth = useRef(0);
-  useEffect(() => window.addEventListener("resize", onResizeWindow), []);
+  useEffect(() => window.addEventListener("resize", _onResizeWindow), []);
   useEffect(() => updateStyle(initialWidth), [initialWidth]);
-  useEffect(onResizeWindow, []);
+  useEffect(_onResizeWindow, []);
   useEffect(() => {
     preWidth.current = window.innerWidth;
   }, []);
-
-  const willFit = () =>
-    window.innerWidth - width.current >
-    Constants.dimension.minVWToDisplyWorkbench;
 
   return (
     <div
       ref={workbenchRef}
       id="resizableWorkBench"
-      className={`resizable ${getClass()}`}
+      className={`resizable ${_getClass()}`}
     >
       {arg.child}
       <div ref={resizableHandle} id="dragger" onMouseDown={onMouseDown}></div>
     </div>
   );
-
-  function onResizeWindow() {
-    const isDragingRight = isIncreasingWidth();
-    if (isDragingRight) {
-      if (displayingState === WorkBenchVisiblityState.hidden) {
-        dispatch(setDisplayingState());
-      }
-    } else {
-      if (!willFit() && displayingState != WorkBenchVisiblityState.hidden) {
-        dispatch(setDisplayingState(WorkBenchVisiblityState.hidden));
-        return;
-      }
-    }
-  }
-
-  function isIncreasingWidth() {
-    const currentWidth = window.innerWidth;
-    const result = currentWidth > preWidth.current;
-    if (currentWidth != preWidth.current) {
-      preWidth.current = currentWidth;
-    }
-    return result;
-  }
-
-  function isMinOrMax(currentWidth: number) {
-    return currentWidth < 160 || window.innerWidth - currentWidth < 500;
-  }
 
   function onMouseMove(e: MouseEvent) {
     const dx = e.clientX - xCor.current;
@@ -102,14 +70,52 @@ export function ResizableComponent(arg: ResizableComponentArg) {
     document.addEventListener("mouseup", onMouseUp);
   }
 
-  function getClass() {
+  function _willFit() {
+    return (
+      window.innerWidth - width.current >
+      Constants.dimension.minVWToDisplyWorkbench
+    );
+  }
+
+  function _onResizeWindow() {
+    const isDragingRight = _isIncreasingWidth();
+    if (isDragingRight) {
+      if (displayingState === WorkBenchVisiblityState.hidden) {
+        dispatch(setDisplayingState());
+      }
+    } else {
+      if (!_willFit() && displayingState != WorkBenchVisiblityState.hidden) {
+        dispatch(setDisplayingState(WorkBenchVisiblityState.hidden));
+        return;
+      }
+    }
+  }
+
+  function _isIncreasingWidth() {
+    const currentWidth = window.innerWidth;
+    const result = currentWidth > preWidth.current;
+    if (currentWidth != preWidth.current) {
+      preWidth.current = currentWidth;
+    }
+    return result;
+  }
+
+  function isMinOrMax(currentWidth: number) {
+    return (
+      currentWidth < Constants.dimension.minSidePanelWidth ||
+      window.innerWidth - currentWidth <
+        Constants.dimension.minVWToDisplyWorkbench
+    );
+  }
+
+  function _getClass() {
     switch (displayingState) {
       case WorkBenchVisiblityState.hidden:
         return "hidden";
       case WorkBenchVisiblityState.overlayed:
         return "overlayed";
       default:
-        if (!willFit()) {
+        if (!_willFit()) {
           dispatch(setDisplayingState(WorkBenchVisiblityState.overlayed));
           return "overlayed";
         }

@@ -1,7 +1,7 @@
 import ReadMePage from "../../pages/readme/ReadMePage";
 import SkillsPage from "../../pages/skills/SkillsPage";
 
-export const paths = new Map<string, JSX.Element>([
+export const explorerPages = new Map<string, JSX.Element>([
   ["/ReadMe.md", <ReadMePage />],
-  ["/skills/test/Skills.json", <SkillsPage />],
+  ["/skills/Skills.json", <SkillsPage />],
 ]);

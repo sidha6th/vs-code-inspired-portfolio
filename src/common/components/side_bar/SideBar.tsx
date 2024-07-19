@@ -1,33 +1,36 @@
 import { useSelector, useDispatch } from "react-redux";
-import { Explore } from "../svg";
 import style from "./SideBar.module.scss";
 import { RootState } from "../../../core/store/store";
 import {
   changeTab,
   toggleWorkbenchVisiblity,
+  WorkBenchVisiblityState,
 } from "../../slices/side_bar_slice";
-import SourceControlSVG from "../svg/SourceControl";
-import PostmanSVG from "../svg/Postman";
 
-export default function SideBar() {
+export default function SideBar(arg: {
+  tabs: {
+    child: JSX.Element;
+    onClick: () => void;
+  }[];
+}) {
   const state = useSelector((state: RootState) => state.sidebarSlice);
   const dispatch = useDispatch();
-  const tabs = [
-    { child: <Explore />, onClick: () => {} },
-    { child: <SourceControlSVG />, onClick: () => {} },
-    { child: <PostmanSVG />, onClick: () => {},}
-  ];
 
   return (
     <div id={style.sideBar}>
-      {tabs.map((value, index) => (
-        <Tab
-          isActive={index == state.activeTabIndex}
-          onclick={() => onChangeTab(index)}
-          child={value.child}
-          key={index}
-        />
-      ))}
+      {arg.tabs.map((value, index) => {
+        const isActive =
+          index == state.activeTabIndex &&
+          state.workBenchVisiblity != WorkBenchVisiblityState.hidden;
+        return (
+          <Tab
+            isActive={isActive}
+            onclick={() => onChangeTab(index)}
+            child={value.child}
+            key={index}
+          />
+        );
+      })}
     </div>
   );
 

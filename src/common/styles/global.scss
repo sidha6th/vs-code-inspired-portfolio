@@ -1,27 +1,28 @@
-@mixin hoverStyle($hoverBackground:var(--editor-bg)) {
-    &:hover {
-        background-color: $hoverBackground ;
-    }
+@mixin hoverStyle($hoverBackground: var(--editor-bg)) {
+  &:hover {
+    background-color: $hoverBackground ;
   }
-  
-  @mixin buttonHover() {
-    &:hover {
-      background-color: var(--side-panel-bg);
-      border-radius: 4px;
-    }
-  }
-  
-  @mixin font {
-    color: var(--primary-white);
-    line-height: 40px;
-    text-align: justify;
-    font-family: Consolas, Courier New, monospace;
-  }
+}
 
-  path{
-    fill: var(--icon-color);
+@mixin buttonHover() {
+  &:hover {
+    background-color: var(--side-panel-bg);
+    border-radius: 4px;
   }
-  
-  svg:hover>path{
-    fill: var(--primary-white);
-  }
+}
+
+@mixin font {
+  color: var(--primary-white);
+  line-height: 40px;
+  text-align: justify;
+  font-family: Consolas, Courier New, monospace;
+}
+
+svg path {
+  fill: var(--icon-color);
+}
+
+
+svg:hover>path {
+  fill: var(--primary-white);
+}

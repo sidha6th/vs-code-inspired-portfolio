@@ -48,7 +48,7 @@ function FolderTile({
       </div>
       {opened ? (
         <ExpansionTileListView
-          parentPath={parentPath}
+          currentPath={parentPath}
           nodes={Array.from(node?.node.entries() ?? [])}
           padLeftCount={paddLeftCount + 1}
         />

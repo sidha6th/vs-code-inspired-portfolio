@@ -1,9 +1,8 @@
 import { dimensions } from "./dimensions";
 
-namespace Constants{
-    export const dimension = dimensions;
-    export const defaultPath = "/landingPage"
-    
+namespace Constants {
+  export const dimension = dimensions;
+  export const defaultPath = "/landingPage";
 }
 
-export default Constants
+export default Constants;

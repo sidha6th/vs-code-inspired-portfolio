@@ -7,6 +7,7 @@ div#resizableWorkBench.overlayed {
     height: calc(100% - (var(--bottom-bar-height) + var(--top-bar-height)));
     flex-shrink: 0;
     display: flex;
+
     @media (max-width: 400px) {
         width: 100%;
     }

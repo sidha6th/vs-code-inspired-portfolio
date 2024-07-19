@@ -7,8 +7,8 @@ export function DashBoard() {
   return (
     <div className={style.dashBoard}>
       <TopBar />
-      <DashboardBody/>
-      <BottomBar/>
+      <DashboardBody />
+      <BottomBar />
     </div>
   );
 }

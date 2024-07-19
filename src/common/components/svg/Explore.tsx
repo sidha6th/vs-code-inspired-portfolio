@@ -1,5 +1,5 @@
 import type { SVGProps } from "react";
-const SvgExplore = (props: SVGProps<SVGSVGElement>) => (
+const ExploreSVG = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={24}
@@ -13,4 +13,4 @@ const SvgExplore = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-export default SvgExplore;
+export default ExploreSVG;

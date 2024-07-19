@@ -2,7 +2,7 @@ import { ExpandableTile } from "../expantion_tile/ExpantionTile";
 import "./ExpansionTileListView.css";
 
 type ExpansionTileListHolderArg = {
-  parentPath: string;
+  currentPath: string;
   nodes: [string, INode | undefined][];
   padLeftCount: number;
 };
@@ -10,12 +10,12 @@ type ExpansionTileListHolderArg = {
 export function ExpansionTileListView(arg: ExpansionTileListHolderArg) {
   return (
     <div className="expansion-tile-list">
-      {arg.nodes?.map(([key, node]) => {
+      {arg.nodes?.map(([_, node], index) => {
         return (
           <ExpandableTile
-            key={key}
+            key={index}
             node={node}
-            parentPath={arg.parentPath + node?.name}
+            parentPath={arg.currentPath + node?.name}
             padLeftCount={arg.padLeftCount}
           />
         );

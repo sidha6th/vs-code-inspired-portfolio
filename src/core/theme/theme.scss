@@ -8,7 +8,7 @@
   --expandable-item-height: 20px;
   --space-width: 15px;
   --tab-width: 20px;
-  --page-line-indicator-width: 40px;
+  --page-line-indicator-width: 45px;
 }
 
 @mixin comonColor() {
@@ -33,6 +33,7 @@
   --red: #ed484f;
   --yellow: #f8b42b;
   --green: #27d93b;
+  --break-point: #e63a2a94;
 
   // json
   --curly-braces: #dad424;
@@ -41,15 +42,15 @@
 
   //
   @include dimensions();
-  @include comonColor();
 }
+
 [data-theme="light"] {
   --root-bg: #fdfdfd;
   --text: #080808;
   --primary-white: rgb(238, 236, 236);
   --top-bar-bg: #ffffff;
   --line-gray: #e0e0e0;
-  --icon-color:#949191;
+  --icon-color: #949191;
   --text-gray: #778477;
   --bottom-bar-bg: #0776c7;
   --editor-bg: #ffffff;
@@ -61,6 +62,7 @@
   --red: #ed484f;
   --yellow: #f8b42b;
   --green: #27d93b;
+  --break-point: #da4537;
 
   // json
   --curly-braces: #dad424;
@@ -69,5 +71,4 @@
 
   //
   @include dimensions();
-  @include comonColor();
 }

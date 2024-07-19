@@ -39,10 +39,7 @@ export const sideBarSlice = createSlice({
   },
 });
 
-export const {
-  changeTab,
-  setDisplayingState,
-  toggleWorkbenchVisiblity,
-} = sideBarSlice.actions;
+export const { changeTab, setDisplayingState, toggleWorkbenchVisiblity } =
+  sideBarSlice.actions;
 
 export default sideBarSlice.reducer;
