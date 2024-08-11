@@ -1,4 +1,4 @@
-interface INode {
+export interface INode {
   name: string;
   node: Map<string, INode | undefined>;
 

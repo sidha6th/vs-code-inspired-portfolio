@@ -1,0 +1,80 @@
+@import '../../../../../common/styles/global.scss';
+
+div.container {
+  display: flex;
+  flex-direction: row;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: max-content;
+}
+
+h1.name::after {
+  content: "";
+  width: 3px;
+  animation: editorLine;
+  animation-duration: 0.5s;
+  animation-delay: 0.2s;
+  animation-play-state: running;
+  animation-iteration-count: infinite;
+  margin-left: 5px;
+}
+
+h1.name:before {
+  content: '|';
+  color: transparent;
+  width: 0;
+}
+
+h1.title {
+  margin: 0;
+  transition: all 1s;
+  font-weight: 900;
+  display: flex;
+  flex-direction: row;
+  font-size: 3.5em;
+  @include readMeFont;
+}
+
+@keyframes editorLine {
+  0% {
+    background-color: transparent;
+  }
+
+  100% {
+    background-color: var(--line-gray);
+  }
+}
+
+
+// container queries
+@container(max-width:600px) {
+  h1.title {
+    font-size: 3em;
+  }
+}
+
+@container(max-width:500px) {
+  h1.title {
+    font-size: 2.5em;
+  }
+}
+
+@container(max-width:400px) {
+  div.container {
+    flex-direction: column;
+  }
+}
+
+@container(max-width:300px) {
+  div.container {
+    flex-direction: column;
+  }
+}
+@container(max-width:250px) {
+  div.container {
+    flex-direction: column;
+  }
+  h1.title {
+    font-size: 2em;
+  }
+}

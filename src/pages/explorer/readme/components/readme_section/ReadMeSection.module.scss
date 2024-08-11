@@ -14,10 +14,14 @@
 }
 
 .section {
+  align-self: center;
+  max-width: 1500px;
+  width: -webkit-fill-available;
   padding: 20px;
 }
 
 p.content {
+  width: auto;
   font-size: 1.2em;
   @include font;
 }

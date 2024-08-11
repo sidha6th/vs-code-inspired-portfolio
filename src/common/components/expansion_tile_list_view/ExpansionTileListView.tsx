@@ -1,3 +1,4 @@
+import { INode } from "../../types/node";
 import { ExpandableTile } from "../expantion_tile/ExpantionTile";
 import "./ExpansionTileListView.css";
 
@@ -10,7 +11,7 @@ type ExpansionTileListHolderArg = {
 export function ExpansionTileListView(arg: ExpansionTileListHolderArg) {
   return (
     <div className="expansion-tile-list">
-      {arg.nodes?.map(([_, node], index) => {
+      {arg.nodes?.map(([, node], index) => {
         return (
           <ExpandableTile
             key={index}

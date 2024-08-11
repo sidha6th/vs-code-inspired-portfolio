@@ -1,4 +1,3 @@
-
 export function setOrGetWidth(currentWidth?: number) {
   const key = "work-bench-width";
   if (currentWidth != undefined) {

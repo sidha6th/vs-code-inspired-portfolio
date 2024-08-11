@@ -1,0 +1,199 @@
+@import '../../../../../common/styles/global.scss';
+
+$lineHeight: 60px;
+$circleWidth: 20px;
+
+@mixin fillStyle ($color: var(--line-gray)) {
+  background-image: linear-gradient(to left, $color 0%, $color 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 0%;
+  background-position: bottom;
+}
+
+div.timeLine {
+  max-height: inherit;
+  padding-bottom: 50px;
+}
+
+div.line {
+  width: 3px;
+  display: flex;
+  flex-direction: column;
+  margin-left: calc($circleWidth / 2);
+  background-color: var(--line-gray);
+  @include fillStyle(var(--primary-white));
+}
+
+div.circle {
+  border-radius: 50%;
+  opacity: 1;
+  width: $circleWidth;
+  height: $circleWidth;
+  background-color: var(--editor-bg);
+  border: outset var(--primary-white) 2px;
+  display: flex;
+  transition: all 0.4s;
+  @include fillStyle
+}
+
+div.pair {
+  display: flex;
+  flex-direction: row;
+  width: max-content;
+  padding: 1opx;
+}
+
+div.timeLineCard {
+  padding: 10px;
+  margin-top: $circleWidth;
+  border-radius: 10px;
+  border: solid var(--line-gray) 1px;
+  transition: all 0.5s;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.3);
+}
+
+.timeLineCard,
+.title>p {
+  color: var(--primary-white);
+}
+
+.title>p {
+  margin-bottom: 10px;
+}
+
+p.duration {
+  font-size: 13px;
+  margin-left: 10px;
+  font-weight: 100;
+}
+
+.timeLineCard>.title {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+}
+
+div.pair:hover div.line {
+  transition: all 0.4s;
+  background-size: 100% 100%;
+}
+
+div.pair:hover div.circle {
+  scale: 1.2;
+  background-size: 100% 100%;
+}
+
+div.pair:hover div.timeLineCard {
+  box-shadow: -5px 5px 12px 6px rgba(0, 0, 0, 0.3);
+  scale: 1.03;
+  transform: translateY(-5px)translateX(5px);
+}
+
+
+// media queries
+@container (min-width: 1000px) {
+  .title>p.designation {
+    font-size: 30px;
+    font-weight: bold;
+  }
+
+  section.duration {
+    font-size: 20px;
+  }
+
+  .timeLineCard>p.org {
+    font-size: 28px;
+    font-weight: 400;
+  }
+
+  div.line {
+    height: calc($lineHeight + 50px);
+  }
+}
+
+@container (max-width: 1000px) {
+  .title {
+    flex-direction: row;
+    display: flex;
+  }
+
+  .title>p.designation {
+    font-size: 30px;
+    font-weight: bold;
+  }
+
+  .timeLineCard>p.org {
+    font-size: 28px;
+    font-weight: 400;
+  }
+
+  div.line {
+    height: calc($lineHeight + 50px);
+  }
+}
+
+@container (max-width: 800px) {
+  .title>p.designation {
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .title {
+    flex-direction: row;
+    display: flex;
+  }
+
+  .timeLineCard>p.org {
+    font-size: 23px;
+    font-weight: 400;
+  }
+
+  div.line {
+    height: calc($lineHeight + 50px);
+  }
+}
+
+@container (max-width: 600px) {
+  .timeLineCard>.title {
+    align-items: start;
+    flex-direction: column;
+    display: flex;
+  }
+
+  p.duration {
+    margin: 0;
+  }
+
+}
+
+@container (max-width: 500px) {
+  .title>p.designation {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .timeLineCard>p.org {
+    font-size: 18px;
+    font-weight: 400;
+  }
+
+  div.line {
+    height: calc($lineHeight + 50px);
+  }
+}
+
+@container (max-width: 400px) {
+  .title>p.designation {
+    font-size: 15px;
+    font-weight: bold;
+  }
+
+  .timeLineCard>p.org {
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  div.line {
+    height: calc($lineHeight + 50px);
+  }
+}

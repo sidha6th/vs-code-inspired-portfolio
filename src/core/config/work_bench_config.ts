@@ -1,3 +1,5 @@
+import { INode } from "../../common/types/node";
+
 class WorkBenchElements implements INode {
   name: string;
   node: Map<string, INode | undefined>;
@@ -32,7 +34,7 @@ class WorkBenchElements implements INode {
     if (path == undefined) {
       return;
     }
-    const nextNode = (node ?? this.node).get(path+'/');
+    const nextNode = (node ?? this.node).get(path + "/");
     if (nextNode == undefined) {
       return;
     }

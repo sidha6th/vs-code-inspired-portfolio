@@ -1,9 +1,12 @@
-@import '../../common/styles/global.scss';
+@import '../../../common/styles/global.scss';
 
 #page {
   height: 100%;
   width: 100%;
   overflow: auto;
+  container-type: size;
+  display: flex;
+  flex-direction: column;
   container-type: inline-size;
 }
 
@@ -17,7 +20,7 @@ section>hr {
 }
 
 h1.title {
-  @include font;
+  @include readMeFont;
   text-align: start;
 }
 
@@ -26,5 +29,5 @@ h1.title {
 }
 
 .section>h1 {
-  @include font;
+  @include readMeFont;
 }

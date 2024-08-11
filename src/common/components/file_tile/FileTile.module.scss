@@ -1,20 +1,14 @@
 @import '../../styles/global.scss';
 
-.fileTile {
-    padding-left: 12.33px;
-
-}
-
 div.clickObserver {
     display: flex;
-    flex-direction: column;
     @include hoverStyle();
-}
-
-div.tileWrapper {
-    width: 100%;
 }
 
 .selected {
     background-color: var(--editor-bg);
+}
+
+.space {
+    width: 10px;
 }

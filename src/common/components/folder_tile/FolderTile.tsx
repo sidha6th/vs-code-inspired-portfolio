@@ -1,22 +1,22 @@
 import { useEffect, useRef, useState } from "react";
-import style from "./FolderTile.module.scss";
 import { useSelector } from "react-redux";
+import { RootState } from "../../../core/store/store";
+import { INode } from "../../types/node";
 import ArrowIcon from "../arrow_icon/Arrow";
 import { ExpansionTileListView } from "../expansion_tile_list_view/ExpansionTileListView";
-import { RootState } from "../../../core/store/store";
+import LineAligners from "../json_template_component/sub_components/aligner/LineAligner";
+import style from "./FolderTile.module.scss";
 
 function FolderTile({
   child,
   parentPath,
   node,
   paddLeftCount,
-  marginLeft,
 }: {
   child: JSX.Element;
   parentPath: string;
   node: INode | undefined;
   paddLeftCount: number;
-  marginLeft: number;
 }) {
   const [opened, setState] = useState(false);
   const tileRef = useRef<HTMLDivElement>(null);
@@ -32,17 +32,19 @@ function FolderTile({
     } else {
       doc?.classList.remove(style.selected);
     }
-  }, [currentSelectedPath,opened]);
+  }, [currentSelectedPath, opened]);
 
   return (
-    <div ref={tileRef} className={style.tileWrapper}>
+    <div ref={tileRef}>
       <div className={style.clickObserver} onClick={onClick}>
-        <div
-          style={{ marginLeft: `${marginLeft}px` }}
-          className={style.folderTile}
-        >
+        <div className={style.folderTile}>
+          <LineAligners
+            width={7}
+            length={paddLeftCount}
+            border={paddLeftCount > 0}
+          />
           <ArrowIcon opened={opened} />
-          <div className={style.space}></div>
+          <div className={style.space} />
           {child}
         </div>
       </div>

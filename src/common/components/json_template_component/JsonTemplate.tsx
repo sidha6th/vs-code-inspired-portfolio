@@ -1,9 +1,9 @@
 import { JsonT } from "../../types/json_type";
+import LineAligners from "./sub_components/aligner/LineAligner";
+import KeyValuePairTextArranger from "./sub_components/key_value_arranger/KeyValuePairArranger";
 import SingleLine, {
   LineCount,
 } from "./sub_components/single_line/single_line";
-import LineAligners from "./sub_components/aligner/LineAligner";
-import KeyValuePairTextArranger from "./sub_components/key_value_arranger/KeyValuePairArranger";
 
 export type JsonTemplateArg = {
   items: JsonT[] | string[];
@@ -24,7 +24,7 @@ function JsonTemplate(arg: JsonTemplateArg) {
   return (
     <>
       <SingleLine
-      key={arg.opening?.key}
+        key={arg.opening?.key}
         count={lineCount}
         child={
           <KeyValuePairTextArranger

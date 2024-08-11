@@ -1,8 +1,12 @@
 div.letPadderWithoutBorder {
-  width: var( --space-width);
+  padding: 0;
+  margin: 0;
+  width: var(--space-width);
 }
 
 div.letPadderWithBorder {
-  width: var( --space-width);
+  padding: 0;
+  margin: 0;
+  width: var(--space-width);
   border-left: solid 1px var(--line-gray);
 }

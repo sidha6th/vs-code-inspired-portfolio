@@ -1,21 +1,42 @@
-import style from "./ReadMePage.module.scss";
-import wave from "../../assets/gif/wave.gif";
+import { AnimatedName } from "./components/animated_typing_name/AnimatedName.tsx";
 import { ReadMeSection } from "./components/readme_section/ReadMeSection.tsx";
-// import IntroSection from "./components/image_animation_section/IntroSection.tsx";
+import TimeLineSection, {
+  TimeLineArgs,
+} from "./components/time_line/TimeLineSection.tsx";
+import style from "./ReadMePage.module.scss";
 
 function ReadMePage() {
+  const timeLineArgs: TimeLineArgs[] = [
+    {
+      companyName: "White Rabbit Group",
+      designation: "Software Engineer",
+      from: "2023-Aug",
+      to: "Present",
+    },
+    {
+      companyName: "White Rabbit Group",
+      designation: "Trainee Software engineer",
+      from: "2022-Aug",
+      to: "2023-Aug",
+    },
+    {
+      companyName: "Brototype",
+      designation: "Internship",
+      from: "2021-Nov",
+      to: "2022-Jun",
+    },
+  ];
   return (
     <div id={style.page}>
-      {/* <IntroSection/> */}
       <ReadMeSection
-        title={
-          <h1 className={style.title}>
-            Hi there{" "}
-            <span>
-              <img src={wave} alt="wave.gif" />
-            </span>
-          </h1>
+        child={
+          <>
+            <AnimatedName title={["Flutter", "React"]} />
+          </>
         }
+      />
+      <ReadMeSection
+        title={<h1 className={style.title}>Hi there 👋</h1>}
         content={`I'm a passionate Flutter developer with a background in non-CS fields,
           who followed their love for coding into a career transition. My
           journey into tech ignited a fervent curiosity, leading me to
@@ -26,7 +47,7 @@ function ReadMePage() {
           web development.`}
       />
       <ReadMeSection
-        title={<h1 className={style.title}>Skills <span>🔑</span></h1>}
+        title={<h1 className={style.title}>Skills 🪄</h1>}
         content="With 2 years of dedicated experience in Flutter development, I've
           honed my skills to deliver robust, cross-platform applications that
           seamlessly blend performance and aesthetics. My expertise extends
@@ -37,12 +58,13 @@ function ReadMePage() {
           crafting pixel-perfect UIs, optimizing app performance, or solving
           complex technical challenges, I bring a versatile skill set and a
           passion for innovation to every project I undertake."
-      ></ReadMeSection>
+      />
       <br />
-      <section className={style.section}>
-        <h1>Experiance</h1>
-        <hr />
-      </section>
+
+      <ReadMeSection
+        title={<h1 className={style.title}>Journey 🛵</h1>}
+        child={<TimeLineSection experiances={timeLineArgs} />}
+      />
     </div>
   );
 }

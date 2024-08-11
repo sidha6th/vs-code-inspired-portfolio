@@ -1,5 +1,5 @@
-type Theme = "dark" | "light";
- function setTheme(theme?: Theme) {
+type Theme = "dark" | "fairyfloss" | "purple";
+function setTheme(theme?: Theme) {
   const key = "theme";
   const _theme = theme ?? localStorage.getItem(key) ?? "dark";
   document.documentElement.setAttribute("data-theme", _theme);

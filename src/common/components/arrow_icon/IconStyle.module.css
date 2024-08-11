@@ -1,12 +1,14 @@
-svg.arrow,.close{
-    width:10px;
-    height:10px;
-    fill:#fff;
-    stroke:#fff;
-    transition: all 0.3s;
+svg.arrow,
+.close {
+  width: 10px;
+  height: 10px;
+  align-self: center;
+  fill: #fff;
+  stroke: #fff;
+  transition: all 0.3s;
 }
 
-.opened{
-    transition: all 0.3s;
-    transform: rotate(90deg);
+.opened {
+  transition: all 0.3s;
+  transform: rotate(90deg);
 }

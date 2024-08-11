@@ -1,5 +1,5 @@
-import JsonTemplate from "../../common/components/json_template_component/JsonTemplate";
-import { skills } from "../../core/pages_data/skills";
+import JsonTemplate from "../../../common/components/json_template_component/JsonTemplate";
+import { skills } from "../../../core/pages_data/skills";
 import style from "./SkillsPage.module.css";
 
 function SkillsPage() {

@@ -1,6 +1,8 @@
 import WorkBenchElements from "../config/work_bench_config";
-import { explorerPages } from "./explorer_pages";
+import { explorerFiles } from "./explorer_files";
 
 export const explorerElement = new WorkBenchElements("/");
 
-explorerElement?.create(...Array.from(explorerPages.keys()).map((value): string => value));
+explorerElement?.create(
+  ...Array.from(explorerFiles.keys()).map((value): string => value)
+);

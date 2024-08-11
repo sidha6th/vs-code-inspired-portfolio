@@ -11,9 +11,8 @@
   }
 }
 
-@mixin font {
+@mixin readMeFont {
   color: var(--primary-white);
-  line-height: 40px;
   text-align: justify;
   font-family: Consolas, Courier New, monospace;
 }
@@ -21,7 +20,6 @@
 svg path {
   fill: var(--icon-color);
 }
-
 
 svg:hover>path {
   fill: var(--primary-white);

@@ -1,11 +1,11 @@
-import { useSelector, useDispatch } from "react-redux";
-import style from "./SideBar.module.scss";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../core/store/store";
 import {
   changeTab,
   toggleWorkbenchVisiblity,
   WorkBenchVisiblityState,
 } from "../../slices/side_bar_slice";
+import style from "./SideBar.module.scss";
 
 export default function SideBar(arg: {
   tabs: {
@@ -25,7 +25,10 @@ export default function SideBar(arg: {
         return (
           <Tab
             isActive={isActive}
-            onclick={() => onChangeTab(index)}
+            onclick={() => {
+              value.onClick();
+              onChangeTab(index);
+            }}
             child={value.child}
             key={index}
           />
