@@ -10,6 +10,8 @@ div.container {
 
 h1.name::after {
   content: "";
+  margin-left: 10px;
+  margin-right: 10px;
   width: 3px;
   animation: editorLine;
   animation-duration: 0.5s;
@@ -27,7 +29,6 @@ h1.name:before {
 
 h1.title {
   margin: 0;
-  transition: all 1s;
   font-weight: 900;
   display: flex;
   flex-direction: row;
@@ -41,7 +42,7 @@ h1.title {
   }
 
   100% {
-    background-color: var(--line-gray);
+    background-color: var(--primary-white);
   }
 }
 
@@ -49,13 +50,13 @@ h1.title {
 // container queries
 @container(max-width:600px) {
   h1.title {
-    font-size: 3em;
+    font-size: 2.8em;
   }
 }
 
 @container(max-width:500px) {
   h1.title {
-    font-size: 2.5em;
+    font-size: 2.2em;
   }
 }
 
@@ -70,10 +71,12 @@ h1.title {
     flex-direction: column;
   }
 }
+
 @container(max-width:250px) {
   div.container {
     flex-direction: column;
   }
+
   h1.title {
     font-size: 2em;
   }

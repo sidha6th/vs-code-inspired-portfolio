@@ -1,0 +1,9 @@
+div.dragging {
+    --dragTop: 0;
+    --dragLeft: 0;
+    background-color: white;
+    position: absolute;
+    transform: translateY(var(--dragTop)) translateX(var(--dragLeft));
+    width: max-content;
+    height: max-content;
+}

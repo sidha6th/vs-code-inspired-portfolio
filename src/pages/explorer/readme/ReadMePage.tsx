@@ -1,4 +1,5 @@
 import { AnimatedName } from "./components/animated_typing_name/AnimatedName.tsx";
+import GlowingName from "./components/glowing_name/GlowingName.tsx";
 import { ReadMeSection } from "./components/readme_section/ReadMeSection.tsx";
 import TimeLineSection, {
   TimeLineArgs,
@@ -31,6 +32,7 @@ function ReadMePage() {
       <ReadMeSection
         child={
           <>
+            <GlowingName name="Sidharth" />
             <AnimatedName title={["Flutter", "React"]} />
           </>
         }
@@ -48,7 +50,7 @@ function ReadMePage() {
       />
       <ReadMeSection
         title={<h1 className={style.title}>Skills 🪄</h1>}
-        content="With 2 years of dedicated experience in Flutter development, I've
+        content="With dedicated experience in Flutter development, I've
           honed my skills to deliver robust, cross-platform applications that
           seamlessly blend performance and aesthetics. My expertise extends
           beyond Flutter, as I've ventured into various technologies including
